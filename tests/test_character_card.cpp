@@ -1,0 +1,45 @@
+#include <gtest/gtest.h>
+#include "character_card.h"
+#include "player.h"
+
+class CharacterCardTest : public ::testing::Test {
+protected:
+    void SetUp() override {
+        card = std::make_unique<CharacterCard>(1, "Тестовая карта", 30, 20, "разработка");
+        player = std::make_unique<Player>("test_id", "test_secret");
+    }
+
+    std::unique_ptr<CharacterCard> card;
+    std::unique_ptr<Player> player;
+};
+
+TEST_F(CharacterCardTest, GetReputationReturnsCorrectValue) {
+    EXPECT_EQ(card->getReputation(), 30);
+}
+
+TEST_F(CharacterCardTest, GetMoneyReturnsCorrectValue) {
+    EXPECT_EQ(card->getMoney(), 20);
+}
+
+TEST_F(CharacterCardTest, GetDepartmentReturnsCorrectValue) {
+    EXPECT_EQ(card->getDepartment(), "разработка");
+}
+
+TEST_F(CharacterCardTest, IsPossibleToPlayReturnsTrueForSameDepartment) {
+    player->setDepartment("разработка");
+    EXPECT_TRUE(card->isPossibleToPlay(*player));
+}
+
+TEST_F(CharacterCardTest, IsPossibleToPlayReturnsFalseForDifferentDepartment) {
+    player->setDepartment("финансы");
+    EXPECT_FALSE(card->isPossibleToPlay(*player));
+}
+
+TEST_F(CharacterCardTest, ExecuteAddsAllyAndUpdatesStats) {
+    player->setDepartment("разработка");
+    card->execute(*player);
+    
+    EXPECT_EQ(player->getAllies().size(), 1);
+    EXPECT_EQ(player->getReputation(), 3); // 10% от 30
+    EXPECT_EQ(player->getTrust(), 20); // 10 (базовое) + 10 (от карты персонажа)
+} 
