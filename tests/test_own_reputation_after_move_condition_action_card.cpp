@@ -31,7 +31,7 @@ TEST_F(OwnReputationAfterMoveConditionActionCardTest, ExecuteUpdatesPlayerStats)
     player->gainReputation(45);
     card->execute(*player);
     
-    EXPECT_EQ(player->getReputation(), 46); // 45 + 1 (10% от 10)
+    EXPECT_EQ(player->getReputation(), 55); // 45 + 10 
     EXPECT_EQ(player->getMoney(), 5);
     EXPECT_EQ(player->getTrust(), 10); // Базовое доверие
 } 

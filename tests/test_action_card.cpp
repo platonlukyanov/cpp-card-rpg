@@ -28,7 +28,7 @@ TEST_F(ActionCardTest, IsPossibleToPlayReturnsTrue) {
 TEST_F(ActionCardTest, ExecuteUpdatesPlayerStats) {
     card->execute(*player);
     
-    EXPECT_EQ(player->getReputation(), 1); // 10% от 10
+    EXPECT_EQ(player->getReputation(), 10);
     EXPECT_EQ(player->getMoney(), 5);
     EXPECT_EQ(player->getTrust(), 20); // 10 (базовое) + 10 (изменение)
 } 

@@ -14,6 +14,6 @@ bool OwnReputationBeforeMoveConditionActionCard::isPossibleToPlay(const Player& 
 }
 
 void OwnReputationBeforeMoveConditionActionCard::execute(Player& player) {
-    player.gainReputation(getReputationChange() / 10);
+    player.gainReputation(getReputationChange());
     player.gainMoney(getMoneyChange());
 } 

@@ -10,10 +10,10 @@ int OwnReputationAfterMoveConditionActionCard::getMinReputation() const {
 }
 
 bool OwnReputationAfterMoveConditionActionCard::isPossibleToPlay(const Player& player) const {
-    return (player.getReputation() + getReputationChange() / 10) >= minReputation_;
+    return (player.getReputation() + getReputationChange()) >= minReputation_;
 }
 
 void OwnReputationAfterMoveConditionActionCard::execute(Player& player) {
-    player.gainReputation(getReputationChange() / 10);
+    player.gainReputation(getReputationChange());
     player.gainMoney(getMoneyChange());
 } 

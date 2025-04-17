@@ -31,7 +31,7 @@ TEST_F(SameDepartmentConditionActionCardTest, ExecuteUpdatesPlayerStats) {
     player->setDepartment("разработка");
     card->execute(*player);
     
-    EXPECT_EQ(player->getReputation(), 1); // 10% от 10
+    EXPECT_EQ(player->getReputation(), 10);
     EXPECT_EQ(player->getMoney(), 5);
     EXPECT_EQ(player->getTrust(), 10); // Базовое доверие
 } 

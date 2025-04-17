@@ -4,7 +4,12 @@
 
 class TrustBeforeConditionLeverageCard : public LeverageCard {
 public:
-    TrustBeforeConditionLeverageCard(int id, const std::string& name, int reputation, int money, int trust, int minTrust);
+    TrustBeforeConditionLeverageCard(int id,
+                const std::string& name,
+                int reputation,
+                int money,
+                int trust,
+                int minTrust);
     
     int getMinTrust() const;
     bool isPossibleToPlay(const Player& player) const override;

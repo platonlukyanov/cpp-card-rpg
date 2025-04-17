@@ -15,9 +15,9 @@ bool TrustBeforeConditionLeverageCard::isPossibleToPlay(const Player& player) co
 
 void TrustBeforeConditionLeverageCard::execute(Player& player) {
     executePreeffects(player);
-    executeMoneyDamage(player);
-    executeReputationDamage(player);
-    if (player.getTrust() < minTrust_) {
+    if (player.getTrust() < getMinTrust()) {
         executeTrustDamage(player);
     }
+    executeMoneyDamage(player);
+    executeReputationDamage(player);
 } 

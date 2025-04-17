@@ -15,8 +15,7 @@ bool CharacterCard::isPossibleToPlay(const Player& player) const {
 void CharacterCard::execute(Player& player) {
     // При взятии персонажа в союзники, игрок получает 10% от его репутации и доверия
     player.gainReputation(reputation_ / 10);
-    player.gainMoney(money_);
-    player.gainTrust(10); // Базовое доверие за союзника
+    player.gainTrust(1); // Базовое доверие за союзника (10% oт стандартных 10)
     player.addAlly(*this);
 }
 

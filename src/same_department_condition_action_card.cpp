@@ -14,6 +14,6 @@ bool SameDepartmentConditionActionCard::isPossibleToPlay(const Player& player) c
 }
 
 void SameDepartmentConditionActionCard::execute(Player& player) {
-    player.gainReputation(getReputationChange() / 10);
+    player.gainReputation(getReputationChange());
     player.gainMoney(getMoneyChange());
 } 

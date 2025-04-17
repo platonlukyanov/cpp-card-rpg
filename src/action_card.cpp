@@ -14,7 +14,7 @@ bool ActionCard::isPossibleToPlay(const Player& player) const {
 }
 
 void ActionCard::execute(Player& player) {
-    player.gainReputation(reputationChange_ / 10);
+    player.gainReputation(reputationChange_);
     player.gainMoney(moneyChange_);
     player.gainTrust(trustChange_);
 }

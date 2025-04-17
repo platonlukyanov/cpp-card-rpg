@@ -40,6 +40,6 @@ TEST_F(CharacterCardTest, ExecuteAddsAllyAndUpdatesStats) {
     card->execute(*player);
     
     EXPECT_EQ(player->getAllies().size(), 1);
-    EXPECT_EQ(player->getReputation(), 3); // 10% от 30
-    EXPECT_EQ(player->getTrust(), 20); // 10 (базовое) + 10 (от карты персонажа)
+    EXPECT_EQ(player->getReputation(), 3);
+    EXPECT_EQ(player->getTrust(), 11); // 10 (базовое) + 1 (от карты персонажа)
 } 

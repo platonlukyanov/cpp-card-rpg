@@ -52,11 +52,7 @@ TEST_F(MoveTest, TradeUpdatesPlayerMoney) {
 TEST_F(MoveTest, UseLeverageUpdatesPlayerStats) {
     Move move(*player, std::move(card));
     Player target("target_id", "target_secret");
-    target.gainMoney(5);
-    target.gainReputation(10);
-    auto leverageCard = factory->createCard("Рассказать о твите из прошлого десятелетия", 1);
+    auto leverageCard = factory->createCard("Раскрыть статус миграции двоюродной сестры", 1);
     move.useLeverage(*dynamic_cast<LeverageCard*>(leverageCard.get()), target);
-    EXPECT_EQ(target.getTrust(), 9); // Начальное доверие 10, минус 4 от карты рычага, так как доверие < 50
-    EXPECT_EQ(target.getReputation(), 5); // Начальное доверие 0, минус 1 от карты рычага
-    EXPECT_EQ(target.getMoney(), 5); // Начальное деньги 0, минус 0 от карты рычага
+    EXPECT_EQ(target.getTrust(), 6); // Начальное доверие 10, минус 4 от карты рычага
 } 

@@ -14,7 +14,7 @@ bool AllyReputationConditionActionCard::isPossibleToPlay(const Player& player) c
 }
 
 void AllyReputationConditionActionCard::execute(Player& player) {
-    player.gainReputation(getReputationChange() / 10);
+    player.gainReputation(getReputationChange());
     player.gainMoney(getMoneyChange());
     player.gainTrust(getTrustChange());
 } 
