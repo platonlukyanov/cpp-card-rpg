@@ -10,7 +10,6 @@ public:
     AI(const std::string& id, const std::string& secret);
     ~AI() override = default;
 
-    std::string getName() const;
     std::unique_ptr<Move> makeMove(Stack& stack);
 
 private:

@@ -106,13 +106,13 @@ std::unique_ptr<LeverageCard> CardFactory::createLeverageCard(const std::string&
     if (name == "Раскрыть статус миграции двоюродной сестры") 
         return std::make_unique<TrustBeforeConditionLeverageCard>(id, name, -10, -5, -4, 50);
     if (name == "Рассказать о твите из прошлого десятелетия") 
-        return std::make_unique<LeverageCard>(id, name, -50, 0, -10);
+        return std::make_unique<LeverageCard>(id, name, -5, 0, -1);
     if (name == "Вызвать налоговую инспекцию") 
-        return std::make_unique<LeverageCard>(id, name, -80, -100, -20);
+        return std::make_unique<LeverageCard>(id, name, -8, -10, -2);
     if (name == "Раскрыть секретную информацию") 
-        return std::make_unique<LeverageCard>(id, name, -120, 0, -30);
+        return std::make_unique<LeverageCard>(id, name, -12, 0, -3);
     if (name == "Обвинить в плагиате") 
-        return std::make_unique<LeverageCard>(id, name, -90, -60, -10);
+        return std::make_unique<LeverageCard>(id, name, -9, -6, -1);
 
     return nullptr;
 }

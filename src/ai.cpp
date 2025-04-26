@@ -3,10 +3,8 @@
 #include <memory>
 
 AI::AI(const std::string& id, const std::string& secret)
-    : Player(id, secret) {}
-
-std::string AI::getName() const {
-    return AI_NAME;
+    : Player(id, secret) {
+        setName(AI_NAME);
 }
 
 std::unique_ptr<Move> AI::makeMove(Stack& stack) {

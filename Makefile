@@ -1,5 +1,5 @@
 CXX := g++
-CXXFLAGS := -Wall -Wpedantic -Werror -std=c++17 -Iinclude
+CXXFLAGS := -Wall -Wpedantic -Werror -std=c++20 -Iinclude
 LDFLAGS := -lpthread
 
 # Directories

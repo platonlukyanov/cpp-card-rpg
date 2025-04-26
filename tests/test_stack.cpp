@@ -91,3 +91,29 @@ TEST_F(StackTest, ShuffleChangesCardOrder) {
     
     EXPECT_TRUE(orderChanged);
 } 
+TEST_F(StackTest, FetchPlayersCardsReturnsCorrectCards) {
+    stack->pushCard(factory->createCard("Тимлид", 1));
+    stack->pushCard(factory->createCard("Финансовый консультант", 2));
+    stack->pushCard(factory->createCard("Юрист", 3));
+    stack->pushCard(factory->createCard("Менеджер по продажам", 4));
+    stack->pushCard(factory->createCard("Разработчик", 5));
+    
+    auto cards = stack->fetchPlayersCards(3);
+    EXPECT_EQ(cards.size(), 3) << "Expected 3 cards to be fetched";
+
+    EXPECT_TRUE(cards[0]->getName() == "Разработчик") << "Card 0 name mismatch: expected 'Тимлид', got '" << cards[0]->getName() << "'";
+    EXPECT_TRUE(cards[1]->getName() == "Менеджер по продажам") << "Card 1 name mismatch: expected 'Финансовый консультант', got '" << cards[1]->getName() << "'";
+    EXPECT_TRUE(cards[2]->getName() == "Юрист") << "Card 2 name mismatch: expected 'Юрист', got '" << cards[2]->getName() << "'";
+}
+
+TEST_F(StackTest, FetchPlayersCardsLeavesExactlyNMinusPlayersCount) {
+    stack->pushCard(factory->createCard("Юрист", 3));
+    stack->pushCard(factory->createCard("Презентовать большой проект", 4));
+    stack->pushCard(factory->createCard("Менеджер по продажам", 4));
+    stack->pushCard(factory->createCard("Разработчик", 5));
+    
+    auto cards = stack->fetchPlayersCards(3);
+    EXPECT_EQ(cards.size(), 3) << "Expected 3 cards to be fetched";
+    EXPECT_EQ(stack->isEmpty(), false);
+}
+

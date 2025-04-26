@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include "card.h"
+#include "character_card.h"
 
 class Stack {
 public:
@@ -14,7 +15,7 @@ public:
     Card* popCard();
     void pushCard(std::unique_ptr<Card> card);
     void shuffle();
-    void fetchPlayersCards(int count);
+    std::vector<std::unique_ptr<CharacterCard>> fetchPlayersCards(int count);
     Card* peekCard() const;
 
 private:

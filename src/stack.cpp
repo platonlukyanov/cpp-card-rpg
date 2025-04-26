@@ -2,6 +2,8 @@
 #include <algorithm>
 #include <random>
 #include <chrono>
+#include <vector>
+#include "character_card.h"
 
 Stack::Stack() {}
 
@@ -50,9 +52,29 @@ void Stack::shuffle() {
     std::shuffle(cards_.begin(), cards_.end(), gen);
 }
 
-void Stack::fetchPlayersCards(int count) {
-    // TODO: Implement fetching cards for players
+std::vector<std::unique_ptr<CharacterCard>> Stack::fetchPlayersCards(int count) {
+    std::vector<std::unique_ptr<CharacterCard>> cards;
+    std::vector<std::unique_ptr<Card>> cardsToReturnBack;
+
+    while (cards.size() < static_cast<size_t>(count)) {
+        std::unique_ptr<Card> card = drawCard();
+
+        if (card->getType() == Card::Type::CHARACTER) {
+            cards.emplace_back(std::unique_ptr<CharacterCard>(
+                static_cast<CharacterCard*>(card.release())
+            ));
+        } else {
+            cardsToReturnBack.emplace_back(std::move(card));
+        }
+    }
+
+    for (auto& card : cardsToReturnBack) {
+        pushCard(std::move(card));
+    }
+
+    return cards;
 }
+
 
 Card* Stack::peekCard() const {
     if (cards_.empty()) {

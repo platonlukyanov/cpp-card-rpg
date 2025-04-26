@@ -45,3 +45,7 @@ void Move::useLeverage(LeverageCard& leverageCard, Player& target) {
     leverageCard.execute(target);
     hasPlayed_ = true;
 } 
+
+Card* Move::getCard() const {
+    return card_.get();
+}

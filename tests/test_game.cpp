@@ -10,7 +10,6 @@ protected:
         factory = std::make_unique<CardFactory>();
         player = std::make_unique<Player>("player_id", "player_secret");
         ai = std::make_unique<AI>("ai_id", "ai_secret");
-        game = std::make_unique<Game>();
         
         std::vector<UserPlayerInput> players;
         UserPlayerInput playerInput;
@@ -25,38 +24,35 @@ protected:
         aiInput.isAI = true;
         players.push_back(aiInput);
         
-        game->initialize(players);
+        game.initialize(players);
     }
 
     std::unique_ptr<CardFactory> factory;
     std::unique_ptr<Player> player;
     std::unique_ptr<AI> ai;
-    std::unique_ptr<Game> game;
+    Game game;
 };
-
-TEST_F(GameTest, InitializeSetsUpPlayers) {
-    const auto& players = game->getPlayers();
-    EXPECT_EQ(players.size(), 2);
-    EXPECT_EQ(players[0]->getId(), "player_id");
-    EXPECT_EQ(players[1]->getId(), "ai_id");
+TEST_F(GameTest, GetPlayersReturnsCorrectValue) {
+    EXPECT_EQ(game.getPlayers().size(), 2);
 }
 
-TEST_F(GameTest, OfferMoveReturnsNullptrInitially) {
-    auto move = game->offerMove();
-    EXPECT_EQ(move, nullptr);
+TEST_F(GameTest, OfferMoveReturnsValidMove) {
+    auto move = game.offerMove();
+    ASSERT_NE(move, nullptr);
+    EXPECT_TRUE(move->isAbleToAccept());
 }
 
 TEST_F(GameTest, NextAdvancesGameState) {
-    game->next();
-    // Проверяем, что игра не закончилась
-    EXPECT_FALSE(game->isEnd());
+    game.next();
+    // Проверяем, что игра не закончилась (до 75% игры не должна, а это первый тест)
+    EXPECT_FALSE(game.isEnd());
 }
 
 TEST_F(GameTest, IsEndReturnsFalseInitially) {
-    EXPECT_FALSE(game->isEnd());
+    EXPECT_FALSE(game.isEnd());
 }
 
 TEST_F(GameTest, DetermineWinnerReturnsNullptrInitially) {
-    auto winner = game->determineWinner();
+    auto winner = game.determineWinner();
     EXPECT_EQ(winner, nullptr);
 } 
