@@ -1,5 +1,7 @@
 #include "leverage_card.h"
 #include "player.h"
+#include <memory>
+#include <iostream>
 
 LeverageCard::LeverageCard(int id, const std::string& name,
                           int reputationDamage, int moneyDamage, int trustDamage)
@@ -40,10 +42,16 @@ void LeverageCard::executeTrustDamage(Player& player) {
 void LeverageCard::executePreeffects(Player& player) {}
 
 void LeverageCard::execute(Player& player) {
+    auto hand = player.getHand();
+    std::shared_ptr<LeverageCard> leverageCardCopy = std::make_shared<LeverageCard>(*this);
+    hand->addCard(leverageCardCopy);
+}
+
+void LeverageCard::executeOnPlayer(Player& player) {
     executePreeffects(player);
     executeMoneyDamage(player);
     executeReputationDamage(player);
-    executeTrustDamage(player); 
+    executeTrustDamage(player);
 }
 
 int LeverageCard::getReputationDamage() const {
@@ -56,4 +64,4 @@ int LeverageCard::getMoneyDamage() const {
 
 int LeverageCard::getTrustDamage() const {
     return trustDamage_;
-} 
+}

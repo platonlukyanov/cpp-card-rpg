@@ -27,5 +27,6 @@ public:
 private:
     std::vector<std::shared_ptr<Player>> players_;
     std::unique_ptr<Stack> stack_;
+    bool isEnd_ = false;
     std::queue<std::shared_ptr<Player>> playersQueue_;
 }; 

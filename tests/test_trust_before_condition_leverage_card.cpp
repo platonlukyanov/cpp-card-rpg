@@ -26,7 +26,7 @@ TEST_F(TrustBeforeConditionLeverageCardTest, IsPossibleToPlayReturnsTrueWhenTrus
 }
 
 TEST_F(TrustBeforeConditionLeverageCardTest, ExecuteUpdatesPlayerStats) {
-    card->execute(*player);
+    card->executeOnPlayer(*player);
     
     EXPECT_EQ(player->getReputation(), 9);  // 10 - 1
     EXPECT_EQ(player->getMoney(), 95);     // 100 - 5

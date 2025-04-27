@@ -2,7 +2,7 @@
 #include "player_hand.h"
 
 Player::Player(const std::string& id, const std::string& secret)
-    : id_(id), secret_(secret), reputation_(0), money_(0), trust_(10), hand_(new PlayerHand()) {}
+    : id_(id), secret_(secret), reputation_(0), money_(0), trust_(10), hand_(std::make_shared<PlayerHand>()) {}
 
 const std::string& Player::getId() const {
     return id_;
@@ -41,7 +41,7 @@ void Player::loseReputation(int amount) {
 }
 
 void Player::loseTrust(int amount) {
-    trust_ -= amount;
+    trust_ = std::max(0, trust_ - amount);
 }
 
 void Player::gainMoney(int amount) {
@@ -64,8 +64,8 @@ void Player::setDepartment(const std::string& department) {
     department_ = department;
 }
 
-PlayerHand& Player::getHand() {
-    return *hand_;
+std::shared_ptr<PlayerHand> Player::getHand() {
+    return hand_;
 }
 
 const std::vector<Ally>& Player::getAllies() const {

@@ -13,7 +13,7 @@ public:
     
     int getMinTrust() const;
     bool isPossibleToPlay(const Player& player) const override;
-    void execute(Player& player) override;
+    void executeOnPlayer(Player& player) override;
 
 private:
     int minTrust_;

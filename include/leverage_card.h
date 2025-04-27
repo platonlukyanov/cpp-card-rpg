@@ -10,7 +10,7 @@ public:
 
     bool isPossibleToPlay(const Player& player) const override;
     void execute(Player& player) override;
-
+    virtual void executeOnPlayer(Player& player);
     int getReputationDamage() const;
     int getMoneyDamage() const;
     int getTrustDamage() const;

@@ -4,9 +4,8 @@
 #include <vector>
 #include "card.h"
 #include "ally.h"
-
-class PlayerHand;
-class CharacterCard;
+#include "player_hand.h"
+#include <memory>
 
 class Player {
 public:
@@ -30,7 +29,7 @@ public:
     void setName(const std::string& name);
     void setDepartment(const std::string& department);
 
-    PlayerHand& getHand();
+    std::shared_ptr<PlayerHand> getHand();
     const std::vector<Ally>& getAllies() const;
     void addAlly(const CharacterCard& card);
     bool hasAllyFromDepartment(const std::string& department) const;
@@ -44,6 +43,6 @@ protected:
     int reputation_;
     int money_;
     int trust_;
-    PlayerHand* hand_;
+    std::shared_ptr<PlayerHand> hand_;
     std::vector<Ally> allies_;
 }; 

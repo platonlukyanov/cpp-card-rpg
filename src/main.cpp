@@ -19,6 +19,9 @@ void printBlue(const std::string& text) {
 }
 
 void displayCard(Card* card) {
+    if (!card) {
+        return;
+    }
     std::cout << card->getName();
     
     if (card->getType() == Card::Type::ACTION) {
@@ -61,27 +64,30 @@ void displayCard(Card* card) {
     }
 }
 
-void displayCardShort(Card* card) {
+void displayCardShort(std::shared_ptr<Card> card) {
+    if (!card) {
+        return;
+    }
     std::cout << card->getName();
 
-    if (card->getType() == Card::Type::ACTION) {
-        ActionCard* actionCard = dynamic_cast<ActionCard*>(card);
-        std::cout << " (";
-        printGreen(std::to_string(actionCard->getMoneyChange()));
-        std::cout << ", ";
-        printRed(std::to_string(actionCard->getReputationChange()));
-        std::cout << ", ";
-        printBlue(std::to_string(actionCard->getTrustChange()));
-        std::cout << ")";
-    }
+    // if (card->getType() == Card::Type::ACTION) {
+    //     ActionCard* actionCard = dynamic_cast<ActionCard*>(card);
+    //     std::cout << " (";
+    //     printGreen(std::to_string(actionCard->getMoneyChange()));
+    //     std::cout << ", ";
+    //     printRed(std::to_string(actionCard->getReputationChange()));
+    //     std::cout << ", ";
+    //     printBlue(std::to_string(actionCard->getTrustChange()));
+    //     std::cout << ")";
+    // }
 
-    if (card->getType() == Card::Type::CHARACTER) {
-        CharacterCard* characterCard = dynamic_cast<CharacterCard*>(card);
-        std::cout << " (" << characterCard->getDepartment() << ")";
-    }
+    // if (card->getType() == Card::Type::CHARACTER) {
+    //     CharacterCard* characterCard = dynamic_cast<CharacterCard*>(card.get());
+    //     std::cout << " (" << characterCard->getDepartment() << ")";
+    // }
 
     if (card->getType() == Card::Type::LEVERAGE) {
-        LeverageCard* leverageCard = dynamic_cast<LeverageCard*>(card);
+        std::shared_ptr<LeverageCard> leverageCard = std::dynamic_pointer_cast<LeverageCard>(card);
         std::cout << " (Damage: ";
         printGreen(std::to_string(leverageCard->getMoneyDamage()));
         std::cout << ", ";
@@ -90,11 +96,14 @@ void displayCardShort(Card* card) {
         printBlue(std::to_string(leverageCard->getTrustDamage()));
         std::cout << ")";
     }
-    
+   
     std::cout << std::endl;
 }
 
 void displayPlayer(Player* player) {
+    if (!player) {
+        return;
+    }
     std::cout << "Id: " << player->getId() << std::endl;
     std::cout << "Name: " << player->getPlayerName() << std::endl;
     std::cout << "Secret: " << player->getSecret() << std::endl;
@@ -103,13 +112,16 @@ void displayPlayer(Player* player) {
     std::cout << "Trust: " << player->getTrust() << std::endl;
     std::cout << "Department: " << player->getDepartment() << std::endl;
     
-    PlayerHand& hand = player->getHand();
-    std::cout << "Hand size: " << hand.getCards().size() << std::endl;
+    std::shared_ptr<PlayerHand> hand = player->getHand();
+    std::cout << "Hand size: " << hand->getCards().size() << std::endl;
 
 }
 
 
 void showCurrentPlayerStats(Player* player) {
+    if (!player) {
+        return;
+    }
     printGreen("Money: ");
     std::cout << player->getMoney() << std::endl;
     printRed("Reputation: ");
@@ -119,19 +131,29 @@ void showCurrentPlayerStats(Player* player) {
     std::cout << std::endl;
 }
 
-void showCurrentPlayerCards(Player* player) {
-    if (player->getHand().getCards().size() == 0) {
+void showCurrentPlayerCards(Player& player) {
+    std::shared_ptr<PlayerHand> hand = player.getHand();
+    if (!hand) {
+        return;
+    }
+    std::vector<std::shared_ptr<Card>> cards = hand->getCards();
+    int cardsCount = cards.size();
+    if (cardsCount == 0) {
+        std::cout << "No cards." << std::endl;
         return;
     }
     std::cout << "Cards: ";
 
-    for (auto& card : player->getHand().getCards()) {
-        displayCardShort(card);
+    for (int i = 0; i < cardsCount; ++i) {
+       displayCardShort(cards[i]);
+       if (i < cardsCount - 1) {
+           std::cout << ", ";
+       }
     }
     std::cout << std::endl;
 }
 
-std::string cliSelect(const std::vector<std::string>& options) {
+int cliSelect(const std::vector<std::string>& options) {
     for (int i = 0; static_cast<size_t>(i) < options.size(); ++i) {
         std::cout << "    " << i + 1 << ") " << options[i] << std::endl;
     }
@@ -140,10 +162,10 @@ std::string cliSelect(const std::vector<std::string>& options) {
     std::cin >> number;
     
     if (number < 1 || number > options.size()) {
-        return "";
+        return -1;
     }
     
-    return options[number - 1];
+    return number - 1;
 }
 
 bool secretBrickwall(Player& player, int attempts = 0) {
@@ -163,7 +185,53 @@ bool secretBrickwall(Player& player, int attempts = 0) {
     std::cout << "Too many attempts!" << std::endl;
 
     return false;
+}
 
+void promptForLeverage(Player& player, Game& game) {
+    std::cout << "Select leverage (enter number)" << std::endl;
+
+    for (int i = 0; static_cast<size_t>(i) < player.getHand()->getLeverageCards().size(); ++i) {
+        std::cout << "    " << i + 1 << ") ";
+        displayCardShort(player.getHand()->getLeverageCards()[i]);
+    }
+
+    std::cout << "Enter number: ";
+    size_t number;
+    std::cin >> number;
+    
+    if (number < 1 || number > player.getHand()->getLeverageCards().size()) {
+        return;
+    }
+    std::shared_ptr<LeverageCard> leverageCard = std::dynamic_pointer_cast<LeverageCard>(player.getHand()->getLeverageCards()[number - 1]);
+
+    std::cout << "Leverage selected: " << leverageCard->getName() << std::endl;
+
+    std::cout << "Choose target" << std::endl;
+
+    std::vector<std::string> options;
+    std::vector<std::shared_ptr<Player>> targets;
+    for (auto& potentialTarget : game.getPlayers()) {
+        if (potentialTarget->getId() == player.getId()) {
+            continue;
+        }
+        options.push_back(potentialTarget->getPlayerName());
+        targets.push_back(potentialTarget);
+    }
+
+    auto targetIndex = cliSelect(options);
+
+    if (targetIndex < 0) {
+        return;
+    }
+    
+    std::shared_ptr<Player> target = targets[targetIndex];
+
+    leverageCard->executeOnPlayer(*target);
+    std::cout << "Target: " << target->getPlayerName() << std::endl;
+    std::cout << "Money: " << target->getMoney() << std::endl;
+    std::cout << "Reputation: " << target->getReputation() << std::endl;
+    std::cout << "Trust: " << target->getTrust() << std::endl;
+    std::cout << std::endl;
 }
 
 int main() {
@@ -186,10 +254,23 @@ int main() {
     while (!game.isEnd()) {
         auto move = game.offerMove();
         
+        if (game.isEnd()) {
+            std::cout << "Game is finished 👏👏👏" << std::endl;
+            std::shared_ptr<Player> winner = game.determineWinner();
+            if (winner) {
+                std::cout << "Winner: ";
+                displayPlayer(winner.get());
+            }
+            if (!winner) {
+                std::cout << "No one wins 😢" << std::endl;
+            }
+            break;
+        }
+        
         Player& actor = move->getActor();
         std::cout << "Current player: " << actor.getPlayerName() << std::endl;
         showCurrentPlayerStats(&actor);
-        showCurrentPlayerCards(&actor);
+        showCurrentPlayerCards(actor);
 
         bool isAuthorized = secretBrickwall(actor);
 
@@ -207,14 +288,14 @@ int main() {
             options.push_back("Accept");
         }
 
-        if (actor.getHand().getLeverageCards().size() > 0) {
+        if (actor.getHand()->getLeverageCards().size() > 0) {
             options.push_back("Leverage");
         }
         Card* card = move->getCard();
         displayCard(card);
         
         std::cout << "Options:" << std::endl;
-        auto option = cliSelect(options);
+        auto option = options[cliSelect(options)];
         
         if (option == "Decline") {
             move->decline();
@@ -224,10 +305,9 @@ int main() {
             move->accept();
         }
 
-        // if (option == "Leverage") {
-        //     std::cout << "Leverage" << std::endl;
-        //     // TODO: Implement leverage
-        // } 
+        if (option == "Leverage") {
+            promptForLeverage(actor, game);
+        } 
 
         // if (option == "Trade") {
         //     std::cout << "Trade" << std::endl;

@@ -13,7 +13,7 @@ bool TrustBeforeConditionLeverageCard::isPossibleToPlay(const Player& player) co
     return true;  // Карта рычага всегда может быть сыграна
 }
 
-void TrustBeforeConditionLeverageCard::execute(Player& player) {
+void TrustBeforeConditionLeverageCard::executeOnPlayer(Player& player) {
     executePreeffects(player);
     if (player.getTrust() < getMinTrust()) {
         executeTrustDamage(player);

@@ -1,32 +1,31 @@
 #include "player_hand.h"
+#include <memory>
 
 PlayerHand::PlayerHand() {}
 
 PlayerHand::~PlayerHand() {
-    for (auto card : cards_) {
-        delete card;
-    }
+    cards_.clear();
 }
 
-const std::vector<Card*>& PlayerHand::getCards() const {
+const std::vector<std::shared_ptr<Card>> PlayerHand::getCards() const {
     return cards_;
 }
 
-void PlayerHand::addCard(Card* card) {
+void PlayerHand::addCard(std::shared_ptr<Card> card) {
     cards_.push_back(card);
 }
 
-Card* PlayerHand::playCard(int index) {
+std::shared_ptr<Card> PlayerHand::playCard(int index) {
     if (index < 0 || index >= static_cast<int>(cards_.size())) {
         return nullptr;
     }
-    Card* card = cards_[index];
+    std::shared_ptr<Card> card = cards_[index];
     cards_.erase(cards_.begin() + index);
     return card;
 }
 
-const std::vector<Card*>& PlayerHand::getLeverageCards() const {
-    static std::vector<Card*> leverageCards;
+const std::vector<std::shared_ptr<Card>> PlayerHand::getLeverageCards() const {
+    static std::vector<std::shared_ptr<Card>> leverageCards;
     leverageCards.clear();
     for (auto card : cards_) {
         if (card->getType() == Card::Type::LEVERAGE) {

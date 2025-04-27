@@ -24,12 +24,16 @@ void Move::accept() {
 }
 
 void Move::trade(int price, Player& buyer) {
+    if (!card_->isPossibleToPlay(buyer)) {
+        return;
+    }
     if (hasPlayed_) {
         return;
     }
     
     buyer.loseMoney(price);
     actor_.gainMoney(price);
+    card_->execute(buyer);
     hasPlayed_ = true;
 }
 
@@ -42,7 +46,7 @@ void Move::useLeverage(LeverageCard& leverageCard, Player& target) {
         return;
     }
     
-    leverageCard.execute(target);
+    leverageCard.executeOnPlayer(target);
     hasPlayed_ = true;
 } 
 

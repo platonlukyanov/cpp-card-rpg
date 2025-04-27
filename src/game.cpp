@@ -5,44 +5,43 @@
 #include "player_hand.h"
 
 Game::Game() : stack_(std::make_unique<Stack>()) {
-    std::array<std::string, 37> cards = {
+    std::array<std::string, 6> cards = {
       "Тимлид",
       "Финансовый консультант",
-      "Юрист",
-      "Менеджер по продажам",
-      "Разработчик",
-      "Финансовый аналитик",
-      "Специалист по PR",
-      "Маркетолог",
-      "Тестировщик",
-      "Бухгалтер",
-      "Юрисконсульт",
-      "Продажный агент",
-      "Веб-разработчик",
-      "Финансовый директор",
-      "Специалист по интеллектуальной собственности",
-      "Менеджер по маркетингу",
-      "Архитектор программного обеспечения",
-      "Финансовый контроллер",
-      "Судебный юрист", 
-      "Директор по продажам",
-      "Разработка",
-      "Подставить коллегу и получить повышение",
-      "Презентовать большой проект",
-      "Продать информацию о бизнесе конкурентам",
-      "Уволить сотрудника",
-      "Провести корпоративное мероприятие",
-      "Получить кредит",
-      "Создать новый отдел",
-      "Нанять нового сотрудника",
-      "Провести аудит",
-      "Создать новый продукт",
-      "Раскрыть статус миграции двоюродной сестры",
+    //   "Юрист",
+    //   "Менеджер по продажам",
+    //   "Разработчик",
+    //   "Финансовый аналитик",
+    //   "Специалист по PR",
+    //   "Маркетолог",
+    //   "Тестировщик",
+    //   "Бухгалтер",
+    //   "Юрисконсульт",
+    //   "Продажный агент",
+    //   "Веб-разработчик",
+    //   "Финансовый директор",
+    //   "Специалист по интеллектуальной собственности",
+    //   "Менеджер по маркетингу",
+    //   "Архитектор программного обеспечения",
+    //   "Финансовый контроллер",
+    //   "Судебный юрист", 
+    //   "Директор по продажам",
+    //   "Разработка",
+    //   "Подставить коллегу и получить повышение",
+    //   "Презентовать большой проект",
+    //   "Продать информацию о бизнесе конкурентам",
+    //   "Уволить сотрудника",
+    //   "Провести корпоративное мероприятие",
+    //   "Получить кредит",
+    //   "Создать новый отдел",
+    //   "Нанять нового сотрудника",
+    //   "Провести аудит",
+    //   "Создать новый продукт",
+    //   "Раскрыть статус миграции двоюродной сестры",
       "Рассказать о твите из прошлого десятелетия",
       "Вызвать налоговую инспекцию",
       "Раскрыть секретную информацию",
       "Обвинить в плагиате",
-      "Смерть CEO"
     };
 
     for (int i = 0; static_cast<size_t>(i) < cards.size(); ++i) {
@@ -50,6 +49,7 @@ Game::Game() : stack_(std::make_unique<Stack>()) {
         stack_->pushCard(std::move(card));
     }
     stack_->shuffle();
+    stack_->pushCard(CardFactory::createCard("Смерть CEO", cards.size() + 1));
 }
 
 void Game::initialize(const std::vector<UserPlayerInput>& players) {
@@ -91,11 +91,14 @@ std::unique_ptr<Move> Game::offerMove() {
     std::shared_ptr<Player> actor = playersQueue_.front();
 
     std::unique_ptr<Card> card = stack_->drawCard();
-
     if (!card) {
         return nullptr;
     }
     
+    if (card->getType() == Card::Type::END) {
+        isEnd_ = true;
+    }
+
     std::unique_ptr<Move> move = std::make_unique<Move>(*actor, std::move(card));
 
     return move;
@@ -107,10 +110,32 @@ void Game::next() {
 }
 
 bool Game::isEnd() const {
-    return false;
+    return isEnd_;
 }
 
 std::shared_ptr<Player> Game::determineWinner() const {
-    // TODO: Implement winner determination
-    return nullptr;
+    if (!isEnd_) {
+        return nullptr;
+    }
+
+    std::shared_ptr<Player> winner = players_.front();
+    int trust = 0;
+
+    for (std::shared_ptr<Player> player : players_) {
+        if (player->getTrust() > trust) {
+            winner = player;
+            trust = player->getTrust();
+            continue;
+        }
+        if (player->getTrust() == trust && player->getReputation() > winner->getReputation()) {
+            winner = player;
+            continue;
+        }
+        if (player->getTrust() == trust && player->getReputation() == winner->getReputation() && player->getMoney() > winner->getMoney()) {
+            winner = player;
+            continue;
+        }
+    }
+
+    return winner;
 }
