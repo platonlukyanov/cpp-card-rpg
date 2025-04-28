@@ -25,7 +25,7 @@ void Move::accept() {
 
 void Move::trade(int price, Player& buyer) {
     if (!card_->isPossibleToPlay(buyer)) {
-        return;
+        // urn;
     }
     if (hasPlayed_) {
         return;
@@ -46,7 +46,7 @@ void Move::useLeverage(LeverageCard& leverageCard, Player& target) {
         return;
     }
     
-    leverageCard.executeOnPlayer(target);
+    leverageCard.execute(target);
     hasPlayed_ = true;
 } 
 

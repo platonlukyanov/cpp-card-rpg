@@ -69,23 +69,7 @@ void displayCardShort(std::shared_ptr<Card> card) {
         return;
     }
     std::cout << card->getName();
-
-    // if (card->getType() == Card::Type::ACTION) {
-    //     ActionCard* actionCard = dynamic_cast<ActionCard*>(card);
-    //     std::cout << " (";
-    //     printGreen(std::to_string(actionCard->getMoneyChange()));
-    //     std::cout << ", ";
-    //     printRed(std::to_string(actionCard->getReputationChange()));
-    //     std::cout << ", ";
-    //     printBlue(std::to_string(actionCard->getTrustChange()));
-    //     std::cout << ")";
-    // }
-
-    // if (card->getType() == Card::Type::CHARACTER) {
-    //     CharacterCard* characterCard = dynamic_cast<CharacterCard*>(card.get());
-    //     std::cout << " (" << characterCard->getDepartment() << ")";
-    // }
-
+    
     if (card->getType() == Card::Type::LEVERAGE) {
         std::shared_ptr<LeverageCard> leverageCard = std::dynamic_pointer_cast<LeverageCard>(card);
         std::cout << " (Damage: ";
@@ -187,7 +171,51 @@ bool secretBrickwall(Player& player, int attempts = 0) {
     return false;
 }
 
-void promptForLeverage(Player& player, Game& game) {
+bool promptForTrade(Move& move, std::vector<std::shared_ptr<Player>> players) {
+    Player& actor = move.getActor();
+    std::cout << "Choose buyer" << std::endl;
+
+    std::vector<std::string> options;
+    std::vector<std::shared_ptr<Player>> buyers;
+    for (auto& player : players) {
+        if (player->getId() == actor.getId()) {
+            continue;
+        }
+        options.push_back(player->getPlayerName());
+        buyers.push_back(player);
+    }
+
+    auto buyerIndex = cliSelect(options);
+
+    if (buyerIndex < 0) {
+        return false;
+    }
+    
+    std::shared_ptr<Player> buyer = buyers[buyerIndex];
+    std::cout << "Enter price: ";
+    size_t price;
+    std::cin >> price;
+    
+    if (price < 1) {
+        return false;
+    }
+
+    std::cout << buyer->getPlayerName() << ", please veify your purchase by entering your secret" << std::endl;
+    bool isAuthorized = secretBrickwall(*buyer);
+
+    if (!isAuthorized) {
+        std::cout << "Canceled purchase, no verification" << std::endl;
+        return false;
+    }
+    move.trade(price, *buyer);
+
+    std::cout << "Transaction from" << actor.getPlayerName() << "to" << buyer->getPlayerName() << std::endl;
+    std::cout << "For: " << price << std::endl;
+    std::cout << "Was successful! ✅" << std::endl;
+    return true;
+}
+void promptForLeverage(Move& move, Game& game) {
+    Player& player = move.getActor();
     std::cout << "Select leverage (enter number)" << std::endl;
 
     for (int i = 0; static_cast<size_t>(i) < player.getHand()->getLeverageCards().size(); ++i) {
@@ -226,6 +254,20 @@ void promptForLeverage(Player& player, Game& game) {
     
     std::shared_ptr<Player> target = targets[targetIndex];
 
+    std::cout << target->getPlayerName() << ", ";
+    std::cout << "do you want to buy this card? (Yes/No)" << std::endl;
+    bool isAuthorized = secretBrickwall(*target);
+    if (isAuthorized) {
+        std::vector<std::string> buyoutOptions = {"Yes", "No"};
+        auto option = buyoutOptions[cliSelect(buyoutOptions)];
+        if (option == "Yes") {
+            bool isSuccessful = promptForTrade(move, game.getPlayers());
+            if (isSuccessful) {
+                leverageCard->deactivate(player);
+                return;
+            };
+        }
+    }
     leverageCard->executeOnPlayer(*target);
     std::cout << "Target: " << target->getPlayerName() << std::endl;
     std::cout << "Money: " << target->getMoney() << std::endl;
@@ -255,7 +297,8 @@ int main() {
         auto move = game.offerMove();
         
         if (game.isEnd()) {
-            std::cout << "Game is finished 👏👏👏" << std::endl;
+            std::cout << move->getCard()->getName() << std::endl;
+            std::cout << "Game is finished" << std::endl;
             std::shared_ptr<Player> winner = game.determineWinner();
             if (winner) {
                 std::cout << "Winner: ";
@@ -304,15 +347,14 @@ int main() {
         if (option == "Accept") {
             move->accept();
         }
-
+        
         if (option == "Leverage") {
-            promptForLeverage(actor, game);
+            promptForLeverage(*move, game);
         } 
-
-        // if (option == "Trade") {
-        //     std::cout << "Trade" << std::endl;
-        //     // TODO: Implement trade
-        // }
+        
+        if (option == "Trade") {
+            promptForTrade(*move, game.getPlayers());
+        }
 
         game.next();
     }

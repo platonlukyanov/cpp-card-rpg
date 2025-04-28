@@ -14,11 +14,13 @@ public:
     int getReputationDamage() const;
     int getMoneyDamage() const;
     int getTrustDamage() const;
+    void deactivate(Player& player);
 
 private:
     int reputationDamage_;
     int moneyDamage_;
     int trustDamage_;
+    int indexInHand_;
 
 protected:
         void executeReputationDamage(Player& player);

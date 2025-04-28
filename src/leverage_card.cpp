@@ -45,6 +45,12 @@ void LeverageCard::execute(Player& player) {
     auto hand = player.getHand();
     std::shared_ptr<LeverageCard> leverageCardCopy = std::make_shared<LeverageCard>(*this);
     hand->addCard(leverageCardCopy);
+    indexInHand_ = hand->getCards().size() - 1;
+}
+
+void LeverageCard::deactivate(Player& player) {
+    auto hand = player.getHand();
+    hand->playCard(indexInHand_);
 }
 
 void LeverageCard::executeOnPlayer(Player& player) {
@@ -52,6 +58,7 @@ void LeverageCard::executeOnPlayer(Player& player) {
     executeMoneyDamage(player);
     executeReputationDamage(player);
     executeTrustDamage(player);
+    player.getHand()->playCard(indexInHand_);
 }
 
 int LeverageCard::getReputationDamage() const {

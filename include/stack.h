@@ -14,6 +14,7 @@ public:
     std::unique_ptr<Card> drawCard();
     Card* popCard();
     void pushCard(std::unique_ptr<Card> card);
+    void insertCard(std::unique_ptr<Card> card, int index);
     void shuffle();
     std::vector<std::unique_ptr<CharacterCard>> fetchPlayersCards(int count);
     Card* peekCard() const;

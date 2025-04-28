@@ -46,6 +46,16 @@ void Stack::pushCard(std::unique_ptr<Card> card) {
     }
 }
 
+void Stack::insertCard(std::unique_ptr<Card> card, int index) {
+    if (!card) {
+        return;
+    }
+    auto rawCard = card.release();
+    if (rawCard) {
+        cards_.insert(cards_.begin() + index, rawCard);
+    }
+}
+
 void Stack::shuffle() {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -74,7 +84,6 @@ std::vector<std::unique_ptr<CharacterCard>> Stack::fetchPlayersCards(int count) 
 
     return cards;
 }
-
 
 Card* Stack::peekCard() const {
     if (cards_.empty()) {
