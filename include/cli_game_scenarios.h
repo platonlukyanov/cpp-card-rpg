@@ -9,5 +9,6 @@
 bool promptForTrade(Move& move, const std::vector<std::shared_ptr<Player>>& players);
 void promptForLeverage(Move& move, Game& game);
 void gameEnd(std::shared_ptr<Move> move, Game& game);
+void humanPlayerMove(std::shared_ptr<Move>, Game& game);
 
 #endif

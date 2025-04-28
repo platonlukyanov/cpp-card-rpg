@@ -109,6 +109,7 @@ void promptForLeverage(Move& move, Game& game) {
     }
 
     leverageCard->executeOnPlayer(*target);
+    leverageCard->deactivate(player);
 
     std::cout << "Target: " << target->getPlayerName() << std::endl;
     std::cout << "Money: " << target->getMoney() << std::endl;
@@ -127,5 +128,38 @@ void gameEnd(std::shared_ptr<Move> move, Game& game) {
         displayPlayer(winner.get());
     } else {
         std::cout << "No one wins 😢" << std::endl;
+    }
+}
+
+void humanPlayerMove(std::shared_ptr<Move> move, Game& game) {
+    Player& actor = move->getActor();
+
+    if (!secretBrickwall(actor)) {
+        return;
+    }
+
+    std::vector<std::string> options = {"Decline", "Trade"};
+    if (move->isAbleToAccept()) options.push_back("Accept");
+    if (!actor.getHand()->getLeverageCards().empty()) options.push_back("Leverage");
+
+    Card* card = move->getCard();
+    displayCard(card);
+
+    std::cout << "Options:" << std::endl;
+    int optionIndex = cliSelect(options);
+    if (optionIndex < 0) {
+        std::cout << "Invalid option selected. Skipping turn." << std::endl;
+        return;
+    }
+
+    const std::string& option = options[optionIndex];
+    if (option == "Decline") {
+        move->decline();
+    } else if (option == "Accept") {
+        move->accept();
+    } else if (option == "Leverage") {
+        promptForLeverage(*move, game);
+    } else if (option == "Trade") {
+        promptForTrade(*move, game.getPlayers());
     }
 }

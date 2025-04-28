@@ -58,7 +58,6 @@ void LeverageCard::executeOnPlayer(Player& player) {
     executeMoneyDamage(player);
     executeReputationDamage(player);
     executeTrustDamage(player);
-    deactivate(player);
 }
 
 int LeverageCard::getReputationDamage() const {
