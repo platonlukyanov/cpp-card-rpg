@@ -14,13 +14,54 @@
 #include "player_cli_utils.h"
 #include "cli_game_scenarios.h"
 
+void greetPlayers() {
+    std::cout << "Hello, players!" << std::endl;
+    std::cout << "Welcome to the game!" << std::endl;
+}
+
+std::vector<UserPlayerInput> promptForPlayers() {
+    std::vector<UserPlayerInput> playersInput;
+
+    std::cout << "Enter 'stop' when you are done adding players" << std::endl;
+
+    std::string playerName;
+    while (playerName != "stop") {
+        std::cout << "Enter player name: ";
+        std::cin >> playerName;
+
+        if (playerName == "stop") {
+            break;
+        }
+        std::cout << "Create player secret: ";
+        std::string playerSecret;
+        std::cin >> playerSecret; 
+        UserPlayerInput playerInput;
+        playerInput.playerName = playerName;
+        playerInput.playerSecret = playerSecret;
+        playerInput.isAI = false;
+        playersInput.push_back(playerInput);
+    }
+
+    std::cout << "Do you want to add AI player? (Yes/No)" << std::endl;
+    std::vector<std::string> options = {"Yes", "No"};
+    bool didWantToAddAI = options[cliSelect(options)] == "Yes"; 
+
+    if (didWantToAddAI) {
+        UserPlayerInput aiInput;
+        aiInput.playerName = "AIII";
+        aiInput.playerSecret = "ai";
+        aiInput.isAI = true;
+        playersInput.push_back(aiInput);
+    }
+
+    return playersInput;
+}
+
 int main() {
     Game game;
 
-    std::vector<UserPlayerInput> playersInput = {
-        {"Zach", "12345", false},
-        {"Bob", "67890", false},
-    };
+    greetPlayers();
+    std::vector<UserPlayerInput> playersInput = promptForPlayers();
 
     game.initialize(playersInput);
 
