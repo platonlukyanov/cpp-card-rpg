@@ -55,15 +55,9 @@ TEST_F(MoveTest, CantTradeIfCardIsntPossibleToPlay) {
     Move move(*player, std::move(card));
     Player buyer("buyer_id", "buyer_secret");
     buyer.setDepartment("финансы"); // can't buy a card of a character from different department
+    buyer.loseMoney(100);
     buyer.gainMoney(20);
     move.trade(10, buyer);
     EXPECT_EQ(buyer.getMoney(), 20);
 }
-
-TEST_F(MoveTest, UseLeverageUpdatesPlayerStats) {
-    Move move(*player, std::move(card));
-    Player target("target_id", "target_secret");
-    auto leverageCard = factory->createCard("Раскрыть статус миграции двоюродной сестры", 1);
-    move.useLeverage(*dynamic_cast<LeverageCard*>(leverageCard.get()), target);
-    EXPECT_EQ(target.getTrust(), 6); // Начальное доверие 10, минус 4 от карты рычага
-} 
+ 

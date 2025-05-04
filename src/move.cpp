@@ -25,7 +25,7 @@ void Move::accept() {
 
 void Move::trade(int price, Player& buyer) {
     if (!card_->isPossibleToPlay(buyer)) {
-        // urn;
+        return;
     }
     if (hasPlayed_) {
         return;
@@ -40,15 +40,6 @@ void Move::trade(int price, Player& buyer) {
 void Move::decline() {
     hasPlayed_ = true;
 }
-
-void Move::useLeverage(LeverageCard& leverageCard, Player& target) {
-    if (hasPlayed_) {
-        return;
-    }
-    
-    leverageCard.execute(target);
-    hasPlayed_ = true;
-} 
 
 Card* Move::getCard() const {
     return card_.get();

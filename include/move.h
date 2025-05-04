@@ -16,7 +16,6 @@ public:
     void accept();
     void trade(int price, Player& buyer);
     void decline();
-    void useLeverage(LeverageCard& card, Player& target);
     Card* getCard() const;
 
 private:
