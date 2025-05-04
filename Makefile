@@ -49,4 +49,7 @@ clean:
 format:
 	find . \( -name '*.cpp' -o -name '*.h' \) -print0 | xargs -0 clang-format -i
 
+gen-docs:
+	doxygen Doxyfile
+
 .PHONY: all clean format test

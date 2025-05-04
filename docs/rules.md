@@ -1,3 +1,4 @@
+# Rules
 ## Goal
 
 By the time the "CEO Death" card is drawn, you must have the most of his trust. Your goal is to gain as much trust as possible before this card appears. If two players have the same trust score, the winner is the one with the higher "reputation". If those scores are also equal, the winner is the one with more "money". If those are also equal, the game is declared a draw.
