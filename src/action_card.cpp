@@ -2,14 +2,16 @@
  * Lab Work 2
  */
 #include "action_card.h"
+
 #include "player.h"
 
-ActionCard::ActionCard(int id, const std::string& name,
-                      int reputationChange, int moneyChange, int trustChange)
+ActionCard::ActionCard(int id, const std::string& name, int reputationChange,
+                       int moneyChange, int trustChange)
     : Card(id, Type::ACTION, name),
       reputationChange_(reputationChange),
       moneyChange_(moneyChange),
-      trustChange_(trustChange) {}
+      trustChange_(trustChange) {
+}
 
 bool ActionCard::isPossibleToPlay(const Player& player) const {
     // by default, action card can be played
@@ -35,4 +37,4 @@ int ActionCard::getMoneyChange() const {
 
 int ActionCard::getTrustChange() const {
     return trustChange_;
-} 
+}

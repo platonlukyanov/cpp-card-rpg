@@ -2,10 +2,17 @@
  * Lab Work 2
  */
 #include "player.h"
+
 #include "player_hand.h"
 
 Player::Player(const std::string& id, const std::string& secret)
-    : id_(id), secret_(secret), reputation_(0), money_(0), trust_(10), hand_(std::make_shared<PlayerHand>()) {}
+    : id_(id),
+      secret_(secret),
+      reputation_(0),
+      money_(0),
+      trust_(10),
+      hand_(std::make_shared<PlayerHand>()) {
+}
 
 const std::string& Player::getId() const {
     return id_;
@@ -95,4 +102,4 @@ bool Player::hasAllyWithReputationAbove(int reputation) const {
         }
     }
     return false;
-} 
+}

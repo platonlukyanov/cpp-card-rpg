@@ -2,10 +2,12 @@
  * Lab Work 2
  */
 #include "move.h"
+
 #include "leverage_card.h"
 
 Move::Move(Player& actor, std::unique_ptr<Card> card)
-    : actor_(actor), card_(std::move(card)), hasPlayed_(false) {}
+    : actor_(actor), card_(std::move(card)), hasPlayed_(false) {
+}
 
 Move::~Move() = default;
 
@@ -21,7 +23,7 @@ void Move::accept() {
     if (!isAbleToAccept()) {
         return;
     }
-    
+
     card_->execute(actor_);
     hasPlayed_ = true;
 }
@@ -33,7 +35,7 @@ void Move::trade(int price, Player& buyer) {
     if (hasPlayed_) {
         return;
     }
-    
+
     buyer.loseMoney(price);
     actor_.gainMoney(price);
     card_->execute(buyer);

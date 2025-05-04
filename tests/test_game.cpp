@@ -2,39 +2,40 @@
  * Lab Work 2
  */
 #include <gtest/gtest.h>
-#include "game.h"
-#include "card_factory.h"
-#include "player.h"
+
 #include "ai.h"
+#include "card_factory.h"
+#include "game.h"
+#include "player.h"
 
 class GameTest : public ::testing::Test {
-protected:
-    void SetUp() override {
-        factory = std::make_unique<CardFactory>();
-        
-        std::vector<UserPlayerInput> players;
-        UserPlayerInput playerInput;
-        playerInput.playerName = "player_id";
-        playerInput.playerSecret = "player_secret";
-        playerInput.isAI = false;
-        players.push_back(playerInput);
-        
-        UserPlayerInput aiInput;
-        aiInput.playerName = "ai_id";
-        aiInput.playerSecret = "ai_secret";
-        aiInput.isAI = true;
-        players.push_back(aiInput);
+    protected:
+        void SetUp() override {
+            factory = std::make_unique<CardFactory>();
 
-        game.initialize(players);
+            std::vector<UserPlayerInput> players;
+            UserPlayerInput playerInput;
+            playerInput.playerName = "player_id";
+            playerInput.playerSecret = "player_secret";
+            playerInput.isAI = false;
+            players.push_back(playerInput);
 
-        player = game.getPlayers()[0];
-        ai = game.getPlayers()[1];
-    }
+            UserPlayerInput aiInput;
+            aiInput.playerName = "ai_id";
+            aiInput.playerSecret = "ai_secret";
+            aiInput.isAI = true;
+            players.push_back(aiInput);
 
-    std::unique_ptr<CardFactory> factory;
-    std::shared_ptr<Player> player;
-    std::shared_ptr<Player> ai;
-    Game game;
+            game.initialize(players);
+
+            player = game.getPlayers()[0];
+            ai = game.getPlayers()[1];
+        }
+
+        std::unique_ptr<CardFactory> factory;
+        std::shared_ptr<Player> player;
+        std::shared_ptr<Player> ai;
+        Game game;
 };
 TEST_F(GameTest, GetPlayersReturnsCorrectValue) {
     EXPECT_EQ(game.getPlayers().size(), 2);
@@ -98,7 +99,7 @@ TEST_F(GameTest, DetermineWinnerReturnsPlayerWithMostReputation) {
     // create a situation when player with most reputation wins
     player->gainReputation(100);
     ai->loseReputation(100);
-    
+
     ASSERT_NE(game.determineWinner(), nullptr);
     EXPECT_EQ(game.determineWinner()->getSecret(), player->getSecret());
 }

@@ -2,18 +2,20 @@
  * Lab Work 2
  */
 #include <gtest/gtest.h>
-#include "player.h"
+
 #include "character_card.h"
+#include "player.h"
 
 class PlayerTest : public ::testing::Test {
-protected:
-    void SetUp() override {
-        player = std::make_unique<Player>("test_id", "test_secret");
-        character = std::make_unique<CharacterCard>(1, "Test character", 30, 20, "development");
-    }
+    protected:
+        void SetUp() override {
+            player = std::make_unique<Player>("test_id", "test_secret");
+            character = std::make_unique<CharacterCard>(1, "Test character", 30,
+                                                        20, "development");
+        }
 
-    std::unique_ptr<Player> player;
-    std::unique_ptr<CharacterCard> character;
+        std::unique_ptr<Player> player;
+        std::unique_ptr<CharacterCard> character;
 };
 
 TEST_F(PlayerTest, GetIdReturnsCorrectValue) {
@@ -69,4 +71,4 @@ TEST_F(PlayerTest, HasAllyWithReputationAboveReturnsFalseForNoMatchingAlly) {
     player->setDepartment("development");
     player->addAlly(*character);
     EXPECT_FALSE(player->hasAllyWithReputationAbove(35));
-} 
+}

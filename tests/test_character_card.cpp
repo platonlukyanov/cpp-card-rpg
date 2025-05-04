@@ -2,18 +2,20 @@
  * Lab Work 2
  */
 #include <gtest/gtest.h>
+
 #include "character_card.h"
 #include "player.h"
 
 class CharacterCardTest : public ::testing::Test {
-protected:
-    void SetUp() override {
-        card = std::make_unique<CharacterCard>(1, "Test card", 30, 20, "development");
-        player = std::make_unique<Player>("test_id", "test_secret");
-    }
+    protected:
+        void SetUp() override {
+            card = std::make_unique<CharacterCard>(1, "Test card", 30, 20,
+                                                   "development");
+            player = std::make_unique<Player>("test_id", "test_secret");
+        }
 
-    std::unique_ptr<CharacterCard> card;
-    std::unique_ptr<Player> player;
+        std::unique_ptr<CharacterCard> card;
+        std::unique_ptr<Player> player;
 };
 
 TEST_F(CharacterCardTest, GetReputationReturnsCorrectValue) {
@@ -41,8 +43,8 @@ TEST_F(CharacterCardTest, IsPossibleToPlayReturnsFalseForDifferentDepartment) {
 TEST_F(CharacterCardTest, ExecuteAddsAllyAndUpdatesStats) {
     player->setDepartment("development");
     card->execute(*player);
-    
+
     EXPECT_EQ(player->getAllies().size(), 1);
     EXPECT_EQ(player->getReputation(), 3);
-    EXPECT_EQ(player->getTrust(), 11); // 10 (base) + 1 (from character card)
-} 
+    EXPECT_EQ(player->getTrust(), 11);  // 10 (base) + 1 (from character card)
+}

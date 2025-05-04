@@ -1,9 +1,9 @@
 /* Platon Lukyanov st128133@student.spbu.ru
  * Lab Work 2
  */
-#include "player.h"
-#include "cli_game_utils.h"
 #include "card_cli_utils.h"
+#include "cli_game_utils.h"
+#include "player.h"
 
 void displayPlayer(Player* player) {
     if (!player) return;
@@ -64,7 +64,8 @@ bool secretBrickwall(Player& player) {
 
         if (userAnswer == player.getSecret()) return true;
 
-        std::cout << "Wrong secret! Attempts remaining: " << (MAX_ATTEMPTS - attempts - 1) << std::endl;
+        std::cout << "Wrong secret! Attempts remaining: "
+                  << (MAX_ATTEMPTS - attempts - 1) << std::endl;
         ++attempts;
     }
 

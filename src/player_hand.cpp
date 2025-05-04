@@ -2,9 +2,11 @@
  * Lab Work 2
  */
 #include "player_hand.h"
+
 #include <memory>
 
-PlayerHand::PlayerHand() {}
+PlayerHand::PlayerHand() {
+}
 
 PlayerHand::~PlayerHand() {
     cards_.clear();
@@ -36,4 +38,4 @@ const std::vector<std::shared_ptr<Card>> PlayerHand::getLeverageCards() const {
         }
     }
     return leverageCards;
-} 
+}

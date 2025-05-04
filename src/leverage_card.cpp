@@ -2,16 +2,20 @@
  * Lab Work 2
  */
 #include "leverage_card.h"
-#include "player.h"
-#include <memory>
+
 #include <iostream>
+#include <memory>
+
+#include "player.h"
 
 LeverageCard::LeverageCard(int id, const std::string& name,
-                          int reputationDamage, int moneyDamage, int trustDamage)
+                           int reputationDamage, int moneyDamage,
+                           int trustDamage)
     : Card(id, Type::LEVERAGE, name),
       reputationDamage_(reputationDamage),
       moneyDamage_(moneyDamage),
-      trustDamage_(trustDamage) {}
+      trustDamage_(trustDamage) {
+}
 
 bool LeverageCard::isPossibleToPlay(const Player& player) const {
     // By default the card can be played
@@ -42,11 +46,13 @@ void LeverageCard::executeTrustDamage(Player& player) {
     }
 }
 
-void LeverageCard::executePreeffects(Player& player) {}
+void LeverageCard::executePreeffects(Player& player) {
+}
 
 void LeverageCard::execute(Player& player) {
     auto hand = player.getHand();
-    std::shared_ptr<LeverageCard> leverageCardCopy = std::make_shared<LeverageCard>(*this);
+    std::shared_ptr<LeverageCard> leverageCardCopy =
+        std::make_shared<LeverageCard>(*this);
     hand->addCard(leverageCardCopy);
     indexInHand_ = hand->getCards().size() - 1;
 }

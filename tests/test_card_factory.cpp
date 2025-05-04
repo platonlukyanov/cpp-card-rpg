@@ -2,16 +2,15 @@
  * Lab Work 2
  */
 #include <gtest/gtest.h>
-#include "card_factory.h"
+
 #include "card.h"
+#include "card_factory.h"
 
 class CardFactoryTest : public ::testing::Test {
-protected:
-    void SetUp() override {
-        factory = std::make_unique<CardFactory>();
-    }
+    protected:
+        void SetUp() override { factory = std::make_unique<CardFactory>(); }
 
-    std::unique_ptr<CardFactory> factory;
+        std::unique_ptr<CardFactory> factory;
 };
 
 TEST_F(CardFactoryTest, CreateCharacterCard) {
@@ -29,7 +28,8 @@ TEST_F(CardFactoryTest, CreateActionCard) {
 }
 
 TEST_F(CardFactoryTest, CreateLeverageCard) {
-    auto card = factory->createCard("Reveal the migration status of a cousin", 1);
+    auto card =
+        factory->createCard("Reveal the migration status of a cousin", 1);
     ASSERT_NE(card, nullptr);
     EXPECT_EQ(card->getType(), Card::Type::LEVERAGE);
     EXPECT_EQ(card->getName(), "Reveal the migration status of a cousin");
@@ -45,4 +45,4 @@ TEST_F(CardFactoryTest, CreateEndCard) {
 TEST_F(CardFactoryTest, CreateUnknownCardReturnsNullptr) {
     auto card = factory->createCard("Unknown Card", 1);
     EXPECT_EQ(card, nullptr);
-} 
+}

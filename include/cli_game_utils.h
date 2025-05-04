@@ -4,9 +4,9 @@
 #ifndef CLI_GAME_UTILS_H
 #define CLI_GAME_UTILS_H
 
-#include <string>
-#include <map>
 #include <iostream>
+#include <map>
+#include <string>
 #include <vector>
 
 enum class Color { GREEN, RED, BLUE, DEFAULT };

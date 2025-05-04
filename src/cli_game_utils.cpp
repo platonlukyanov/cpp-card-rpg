@@ -1,20 +1,20 @@
 /* Platon Lukyanov st128133@student.spbu.ru
  * Lab Work 2
  */
-#include <string>
-#include <map>
-#include <iostream>
 #include "cli_game_utils.h"
+
+#include <iostream>
 #include <limits>
+#include <map>
+#include <string>
 #include <vector>
 
 void printColored(const std::string& text, Color color) {
-    static const std::map<Color, std::string> codes {
+    static const std::map<Color, std::string> codes{
         {Color::GREEN, "\033[32m"},
         {Color::RED, "\033[31m"},
         {Color::BLUE, "\033[34m"},
-        {Color::DEFAULT, "\033[0m"}
-    };
+        {Color::DEFAULT, "\033[0m"}};
     std::cout << codes.at(color) << text << codes.at(Color::DEFAULT);
 }
 
@@ -45,4 +45,3 @@ int cliSelect(const std::vector<std::string>& options) {
         std::cout << "Invalid input, try again." << std::endl;
     }
 }
-

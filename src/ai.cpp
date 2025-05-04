@@ -2,12 +2,13 @@
  * Lab Work 2
  */
 #include "ai.h"
-#include "character_card.h"
+
 #include <memory>
 
-AI::AI(const std::string& id, const std::string& secret)
-    : Player(id, secret) {
-        setName(AI_NAME);
+#include "character_card.h"
+
+AI::AI(const std::string& id, const std::string& secret) : Player(id, secret) {
+    setName(AI_NAME);
 }
 
 std::unique_ptr<Move> AI::makeMove(Stack& stack) {
@@ -35,4 +36,4 @@ std::unique_ptr<Move> AI::makeMove(Stack& stack) {
 
     // if all checks passed, take the card from the stack
     return std::make_unique<Move>(*this, stack.drawCard());
-} 
+}

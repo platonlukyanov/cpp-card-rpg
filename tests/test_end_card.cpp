@@ -2,18 +2,19 @@
  * Lab Work 2
  */
 #include <gtest/gtest.h>
+
 #include "end_card.h"
 #include "player.h"
 
 class EndCardTest : public ::testing::Test {
-protected:
-    void SetUp() override {
-        card = std::make_unique<EndCard>(1);
-        player = std::make_unique<Player>("test_id", "test_secret");
-    }
+    protected:
+        void SetUp() override {
+            card = std::make_unique<EndCard>(1);
+            player = std::make_unique<Player>("test_id", "test_secret");
+        }
 
-    std::unique_ptr<EndCard> card;
-    std::unique_ptr<Player> player;
+        std::unique_ptr<EndCard> card;
+        std::unique_ptr<Player> player;
 };
 
 TEST_F(EndCardTest, IsPossibleToPlayReturnsTrue) {
@@ -22,8 +23,8 @@ TEST_F(EndCardTest, IsPossibleToPlayReturnsTrue) {
 
 TEST_F(EndCardTest, ExecuteDoesNotUpdatePlayerStats) {
     card->execute(*player);
-    
+
     EXPECT_EQ(player->getReputation(), 0);
     EXPECT_EQ(player->getMoney(), 0);
-    EXPECT_EQ(player->getTrust(), 10); // Base trust
-} 
+    EXPECT_EQ(player->getTrust(), 10);  // Base trust
+}

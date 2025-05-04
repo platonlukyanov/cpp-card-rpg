@@ -2,18 +2,20 @@
  * Lab Work 2
  */
 #include <gtest/gtest.h>
+
 #include "ally.h"
 #include "character_card.h"
 
 class AllyTest : public ::testing::Test {
-protected:
-    void SetUp() override {
-        character = std::make_unique<CharacterCard>(1, "Test character", 30, 20, "development");
-        ally = std::make_unique<Ally>(*character);
-    }
+    protected:
+        void SetUp() override {
+            character = std::make_unique<CharacterCard>(1, "Test character", 30,
+                                                        20, "development");
+            ally = std::make_unique<Ally>(*character);
+        }
 
-    std::unique_ptr<CharacterCard> character;
-    std::unique_ptr<Ally> ally;
+        std::unique_ptr<CharacterCard> character;
+        std::unique_ptr<Ally> ally;
 };
 
 TEST_F(AllyTest, GetNameReturnsCorrectValue) {
@@ -30,4 +32,4 @@ TEST_F(AllyTest, GetMoneyReturnsCorrectValue) {
 
 TEST_F(AllyTest, GetDepartmentReturnsCorrectValue) {
     EXPECT_EQ(ally->getDepartment(), "development");
-} 
+}

@@ -2,13 +2,16 @@
  * Lab Work 2
  */
 #include "stack.h"
+
 #include <algorithm>
-#include <random>
 #include <chrono>
+#include <random>
 #include <vector>
+
 #include "character_card.h"
 
-Stack::Stack() {}
+Stack::Stack() {
+}
 
 Stack::~Stack() {
     for (auto card : cards_) {
@@ -65,7 +68,8 @@ void Stack::shuffle() {
     std::shuffle(cards_.begin(), cards_.end(), gen);
 }
 
-std::vector<std::unique_ptr<CharacterCard>> Stack::fetchPlayersCards(int count) {
+std::vector<std::unique_ptr<CharacterCard>> Stack::fetchPlayersCards(
+    int count) {
     std::vector<std::unique_ptr<CharacterCard>> cards;
     std::vector<std::unique_ptr<Card>> cardsToReturnBack;
 
@@ -74,8 +78,7 @@ std::vector<std::unique_ptr<CharacterCard>> Stack::fetchPlayersCards(int count) 
 
         if (card->getType() == Card::Type::CHARACTER) {
             cards.emplace_back(std::unique_ptr<CharacterCard>(
-                static_cast<CharacterCard*>(card.release())
-            ));
+                static_cast<CharacterCard*>(card.release())));
         } else {
             cardsToReturnBack.emplace_back(std::move(card));
         }
@@ -93,4 +96,4 @@ Card* Stack::peekCard() const {
         return nullptr;
     }
     return cards_.back();
-} 
+}

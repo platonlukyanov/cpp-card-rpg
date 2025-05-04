@@ -2,20 +2,21 @@
  * Lab Work 2
  */
 #include <iostream>
-#include <vector>
-#include <string>
-#include <memory>
 #include <limits>
 #include <map>
-#include "game.h"
-#include "player_hand.h"
-#include "leverage_card.h"
+#include <memory>
+#include <string>
+#include <vector>
+
 #include "action_card.h"
-#include "character_card.h"
-#include "cli_game_utils.h"
 #include "card_cli_utils.h"
-#include "player_cli_utils.h"
+#include "character_card.h"
 #include "cli_game_scenarios.h"
+#include "cli_game_utils.h"
+#include "game.h"
+#include "leverage_card.h"
+#include "player_cli_utils.h"
+#include "player_hand.h"
 
 int main() {
     Game game;
@@ -24,7 +25,7 @@ int main() {
     std::vector<UserPlayerInput> playersInput = promptForPlayers();
 
     game.initialize(playersInput);
-    std::vector <std::shared_ptr<Player>> players = game.getPlayers();
+    std::vector<std::shared_ptr<Player>> players = game.getPlayers();
 
     while (!game.isEnd()) {
         auto move = game.offerMove();
@@ -39,7 +40,7 @@ int main() {
 
         showCurrentPlayerStats(&actor);
         showCurrentPlayerCards(actor);
-        
+
         if (actor.getId() == "AI") {
             aiPlayerMove(std::move(move), players);
         } else {

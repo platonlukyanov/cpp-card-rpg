@@ -1,18 +1,21 @@
 /* Platon Lukyanov st128133@student.spbu.ru
  * Lab Work 2
  */
-#include "move.h"
-#include "game.h"
-#include "player.h"
-#include "leverage_card.h"
-#include "cli_game_utils.h"
-#include "card_cli_utils.h"
-#include "player_cli_utils.h"
-#include <iostream>
 #include <action_card.h>
-#include <algorithm>
 
-const std::vector<std::shared_ptr<Player>> getHumanPlayers(const std::vector<std::shared_ptr<Player>>& players) {
+#include <algorithm>
+#include <iostream>
+
+#include "card_cli_utils.h"
+#include "cli_game_utils.h"
+#include "game.h"
+#include "leverage_card.h"
+#include "move.h"
+#include "player.h"
+#include "player_cli_utils.h"
+
+const std::vector<std::shared_ptr<Player>> getHumanPlayers(
+    const std::vector<std::shared_ptr<Player>>& players) {
     std::vector<std::shared_ptr<Player>> humanPlayers;
     for (const auto& player : players) {
         if (player->getId() != "AI") {
@@ -22,7 +25,8 @@ const std::vector<std::shared_ptr<Player>> getHumanPlayers(const std::vector<std
     return humanPlayers;
 }
 
-bool promptForTrade(Move& move, const std::vector<std::shared_ptr<Player>>& players) {
+bool promptForTrade(Move& move,
+                    const std::vector<std::shared_ptr<Player>>& players) {
     if (players.empty()) {
         return false;
     }
@@ -53,7 +57,9 @@ bool promptForTrade(Move& move, const std::vector<std::shared_ptr<Player>>& play
     }
     clearInput();
 
-    std::cout << buyer->getPlayerName() << ", please verify your purchase by entering your secret" << std::endl;
+    std::cout << buyer->getPlayerName()
+              << ", please verify your purchase by entering your secret"
+              << std::endl;
 
     if (!secretBrickwall(*buyer)) {
         std::cout << "Canceled purchase, no verification" << std::endl;
@@ -62,14 +68,16 @@ bool promptForTrade(Move& move, const std::vector<std::shared_ptr<Player>>& play
 
     move.trade(price, *buyer);
 
-    std::cout << "Transaction from " << actor.getPlayerName() << " to " << buyer->getPlayerName() << std::endl;
+    std::cout << "Transaction from " << actor.getPlayerName() << " to "
+              << buyer->getPlayerName() << std::endl;
     std::cout << "For: " << price << std::endl;
     std::cout << "Was successful! ✅" << std::endl;
 
     return true;
 }
 
-void promptForLeverage(Move& move, std::vector<std::shared_ptr<Player>>& players) {
+void promptForLeverage(Move& move,
+                       std::vector<std::shared_ptr<Player>>& players) {
     Player& player = move.getActor();
 
     auto leverageCards = player.getHand()->getLeverageCards();
@@ -92,7 +100,8 @@ void promptForLeverage(Move& move, std::vector<std::shared_ptr<Player>>& players
     }
     clearInput();
 
-    auto leverageCard = std::dynamic_pointer_cast<LeverageCard>(leverageCards[number - 1]);
+    auto leverageCard =
+        std::dynamic_pointer_cast<LeverageCard>(leverageCards[number - 1]);
     std::cout << "Leverage selected: " << leverageCard->getName() << std::endl;
 
     std::cout << "Choose target" << std::endl;
@@ -112,7 +121,8 @@ void promptForLeverage(Move& move, std::vector<std::shared_ptr<Player>>& players
 
     auto target = targets[targetIndex];
     if (target->getId() != "AI") {
-        std::cout << target->getPlayerName() << ", do you want to buy this card? (Yes/No)" << std::endl;
+        std::cout << target->getPlayerName()
+                  << ", do you want to buy this card? (Yes/No)" << std::endl;
         bool isAuthorized = secretBrickwall(*target);
         if (!isAuthorized) return;
 
@@ -159,7 +169,7 @@ std::vector<UserPlayerInput> promptForPlayers() {
         }
         std::cout << "Create player secret: ";
         std::string playerSecret;
-        std::cin >> playerSecret; 
+        std::cin >> playerSecret;
         UserPlayerInput playerInput;
         playerInput.playerName = playerName;
         playerInput.playerSecret = playerSecret;
@@ -169,7 +179,7 @@ std::vector<UserPlayerInput> promptForPlayers() {
 
     std::cout << "Do you want to add AI player? (Yes/No)" << std::endl;
     std::vector<std::string> options = {"Yes", "No"};
-    bool didWantToAddAI = options[cliSelect(options)] == "Yes"; 
+    bool didWantToAddAI = options[cliSelect(options)] == "Yes";
 
     if (didWantToAddAI) {
         UserPlayerInput aiInput;
@@ -195,7 +205,8 @@ void gameEnd(std::shared_ptr<Move> move, Game& game) {
     }
 }
 
-void humanPlayerMove(std::shared_ptr<Move> move, std::vector<std::shared_ptr<Player>>& players) {
+void humanPlayerMove(std::shared_ptr<Move> move,
+                     std::vector<std::shared_ptr<Player>>& players) {
     Player& actor = move->getActor();
 
     if (!secretBrickwall(actor)) {
@@ -204,7 +215,8 @@ void humanPlayerMove(std::shared_ptr<Move> move, std::vector<std::shared_ptr<Pla
 
     std::vector<std::string> options = {"Decline", "Trade"};
     if (move->isAbleToAccept()) options.push_back("Accept");
-    if (!actor.getHand()->getLeverageCards().empty()) options.push_back("Leverage");
+    if (!actor.getHand()->getLeverageCards().empty())
+        options.push_back("Leverage");
 
     Card* card = move->getCard();
     displayCard(card);
@@ -228,29 +240,37 @@ void humanPlayerMove(std::shared_ptr<Move> move, std::vector<std::shared_ptr<Pla
     }
 }
 
-void aiOffersTrade(std::unique_ptr<Move> move, std::vector<std::shared_ptr<Player>>& players) {
+void aiOffersTrade(std::unique_ptr<Move> move,
+                   std::vector<std::shared_ptr<Player>>& players) {
     displayCard(move->getCard());
-    std::vector<std::shared_ptr<Player>> humanPlayers = getHumanPlayers(players);
-    
+    std::vector<std::shared_ptr<Player>> humanPlayers =
+        getHumanPlayers(players);
+
     int price = 5;
 
     if (move->getCard()->getType() == Card::Type::CHARACTER) {
-        CharacterCard* characterCard = dynamic_cast<CharacterCard*>(move->getCard());
+        CharacterCard* characterCard =
+            dynamic_cast<CharacterCard*>(move->getCard());
         price = characterCard->getMoney() / 10 * 2;
     }
 
     if (move->getCard()->getType() == Card::Type::ACTION) {
         ActionCard* actionCard = dynamic_cast<ActionCard*>(move->getCard());
-        price = actionCard->getMoneyChange() > 0 ? actionCard->getMoneyChange() * 2 : 5;
+        price = actionCard->getMoneyChange() > 0
+                    ? actionCard->getMoneyChange() * 2
+                    : 5;
     }
 
-    std::sort(humanPlayers.begin(), humanPlayers.end(), [](const std::shared_ptr<Player>& a, const std::shared_ptr<Player>& b) {
-        return a->getMoney() > b->getMoney();
-    });
+    std::sort(
+        humanPlayers.begin(), humanPlayers.end(),
+        [](const std::shared_ptr<Player>& a, const std::shared_ptr<Player>& b) {
+            return a->getMoney() > b->getMoney();
+        });
 
     for (const auto& player : humanPlayers) {
         if (player->getMoney() < price) continue;
-        std::cout << "AI offers " << player->getPlayerName() << " to buy this card for " << price << std::endl;
+        std::cout << "AI offers " << player->getPlayerName()
+                  << " to buy this card for " << price << std::endl;
         bool isAuthorized = secretBrickwall(*player);
         if (!isAuthorized) return;
 
@@ -259,9 +279,11 @@ void aiOffersTrade(std::unique_ptr<Move> move, std::vector<std::shared_ptr<Playe
         int optionIndex = cliSelect(buyoutOptions);
         if (optionIndex < 0) return;
         if (buyoutOptions[optionIndex] == "Yes") {
-            std::cout << "AI and " << player->getPlayerName() << " agree on price: " << price << std::endl;
+            std::cout << "AI and " << player->getPlayerName()
+                      << " agree on price: " << price << std::endl;
             move->trade(price, *player);
-            std::cout << "Transaction from AI to " << player->getPlayerName() << " was successful! ✅" << std::endl;
+            std::cout << "Transaction from AI to " << player->getPlayerName()
+                      << " was successful! ✅" << std::endl;
             return;
         }
     }
@@ -269,15 +291,17 @@ void aiOffersTrade(std::unique_ptr<Move> move, std::vector<std::shared_ptr<Playe
     move->decline();
 }
 
-void aiPlayerMove(std::unique_ptr<Move> move, std::vector<std::shared_ptr<Player>>& players) {
+void aiPlayerMove(std::unique_ptr<Move> move,
+                  std::vector<std::shared_ptr<Player>>& players) {
     Player& actor = move->getActor();
-    
+
     if (actor.getId() != "AI") {
         return;
     }
     std::vector<std::string> options = {"Decline", "Trade"};
     if (move->isAbleToAccept()) options.push_back("Accept");
-    if (!actor.getHand()->getLeverageCards().empty()) options.push_back("Leverage");
+    if (!actor.getHand()->getLeverageCards().empty())
+        options.push_back("Leverage");
 
     Card* card = move->getCard();
     displayCard(card);
@@ -290,20 +314,26 @@ void aiPlayerMove(std::unique_ptr<Move> move, std::vector<std::shared_ptr<Player
 
     if (!actor.getHand()->getLeverageCards().empty()) {
         // find the player with the most trust
-        std::vector<std::shared_ptr<Player>> humanPlayers = getHumanPlayers(players);
-        std::sort(humanPlayers.begin(), humanPlayers.end(), [](const std::shared_ptr<Player>& a, const std::shared_ptr<Player>& b) {
-            return a->getTrust() > b->getTrust();
-        });
+        std::vector<std::shared_ptr<Player>> humanPlayers =
+            getHumanPlayers(players);
+        std::sort(humanPlayers.begin(), humanPlayers.end(),
+                  [](const std::shared_ptr<Player>& a,
+                     const std::shared_ptr<Player>& b) {
+                      return a->getTrust() > b->getTrust();
+                  });
 
         auto maxTrustPlayer = humanPlayers.back();
-        std::cout << "AI targets " << maxTrustPlayer->getPlayerName() << std::endl;
-       
+        std::cout << "AI targets " << maxTrustPlayer->getPlayerName()
+                  << std::endl;
+
         LeverageCard* leverageCard = dynamic_cast<LeverageCard*>(card);
 
         leverageCard->executeOnPlayer(*maxTrustPlayer);
-        std::cout << "AI targets " << maxTrustPlayer->getPlayerName() << std::endl;
+        std::cout << "AI targets " << maxTrustPlayer->getPlayerName()
+                  << std::endl;
         leverageCard->deactivate(actor);
-        std::cout << "AI targets " << maxTrustPlayer->getPlayerName() << std::endl;
+        std::cout << "AI targets " << maxTrustPlayer->getPlayerName()
+                  << std::endl;
         return;
     }
 
