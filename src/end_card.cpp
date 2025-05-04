@@ -1,7 +1,7 @@
 #include "end_card.h"
 #include "player.h"
 
-EndCard::EndCard(int id) : Card(id, Type::END, "Смерть CEO") {}
+EndCard::EndCard(int id) : Card(id, Type::END, "CEO Death") {}
 
 bool EndCard::isPossibleToPlay(const Player& player) const {
     // EndCard can always be played
