@@ -5,7 +5,7 @@
 class OwnReputationBeforeMoveConditionActionCardTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        card = std::make_unique<OwnReputationBeforeMoveConditionActionCard>(1, "Тестовая карта", 10, 5, 50);
+        card = std::make_unique<OwnReputationBeforeMoveConditionActionCard>(1, "Test card", 10, 5, 50);
         player = std::make_unique<Player>("test_id", "test_secret");
     }
 
@@ -33,5 +33,5 @@ TEST_F(OwnReputationBeforeMoveConditionActionCardTest, ExecuteUpdatesPlayerStats
     
     EXPECT_EQ(player->getReputation(), 70); // 60 + 10 
     EXPECT_EQ(player->getMoney(), 5);
-    EXPECT_EQ(player->getTrust(), 10); // Базовое доверие
+    EXPECT_EQ(player->getTrust(), 10); // Base trust
 } 

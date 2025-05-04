@@ -5,7 +5,7 @@
 class SameDepartmentConditionActionCardTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        card = std::make_unique<SameDepartmentConditionActionCard>(1, "Тестовая карта", 10, 5, "разработка");
+        card = std::make_unique<SameDepartmentConditionActionCard>(1, "Test card", 10, 5, "development");
         player = std::make_unique<Player>("test_id", "test_secret");
     }
 
@@ -14,24 +14,24 @@ protected:
 };
 
 TEST_F(SameDepartmentConditionActionCardTest, GetDepartmentReturnsCorrectValue) {
-    EXPECT_EQ(card->getDepartment(), "разработка");
+    EXPECT_EQ(card->getDepartment(), "development");
 }
 
 TEST_F(SameDepartmentConditionActionCardTest, IsPossibleToPlayReturnsTrueWhenDepartmentMatches) {
-    player->setDepartment("разработка");
+    player->setDepartment("development");
     EXPECT_TRUE(card->isPossibleToPlay(*player));
 }
 
 TEST_F(SameDepartmentConditionActionCardTest, IsPossibleToPlayReturnsFalseWhenDepartmentDoesNotMatch) {
-    player->setDepartment("финансы");
+    player->setDepartment("finance");
     EXPECT_FALSE(card->isPossibleToPlay(*player));
 }
 
 TEST_F(SameDepartmentConditionActionCardTest, ExecuteUpdatesPlayerStats) {
-    player->setDepartment("разработка");
+    player->setDepartment("development");
     card->execute(*player);
     
     EXPECT_EQ(player->getReputation(), 10);
     EXPECT_EQ(player->getMoney(), 5);
-    EXPECT_EQ(player->getTrust(), 10); // Базовое доверие
-} 
+    EXPECT_EQ(player->getTrust(), 10); // Base trust
+}

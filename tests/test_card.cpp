@@ -5,7 +5,7 @@
 class CardTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        card = std::make_unique<CharacterCard>(1, "Тестовая карта", 10, 10, "тест");
+        card = std::make_unique<CharacterCard>(1, "Test card", 10, 10, "тест");
     }
 
     std::unique_ptr<Card> card;
@@ -20,5 +20,5 @@ TEST_F(CardTest, GetTypeReturnsCorrectType) {
 }
 
 TEST_F(CardTest, GetNameReturnsCorrectName) {
-    EXPECT_EQ(card->getName(), "Тестовая карта");
+    EXPECT_EQ(card->getName(), "Test card");
 } 

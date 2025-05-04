@@ -5,7 +5,7 @@
 class TrustBeforeConditionLeverageCardTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        card = std::make_unique<TrustBeforeConditionLeverageCard>(1, "Тестовая карта", -1, -5, -4, 40);
+        card = std::make_unique<TrustBeforeConditionLeverageCard>(1, "Test card", -1, -5, -4, 40);
         player = std::make_unique<Player>("test_id", "test_secret");
         player->gainTrust(15);
         player->gainReputation(10);

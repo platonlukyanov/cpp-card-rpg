@@ -1,91 +1,96 @@
-# README для файла `uml.pdf`
+# UML Documentation
 
-## Описание структуры данных и классов
+## Class Diagram
 
-Файл описывает объектно-ориентированную структуру данных, включая классы, их свойства и методы. Основные элементы:
+### Core Classes
 
-### Классы
+#### **1. Game**
+- Properties:
+  - `players`: vector<Player>
+  - `deck`: Deck
+  - `currentPlayer`: Player*
+  - `gameState`: GameState
+- Methods:
+  - `initialize()`
+  - `start()`
+  - `processTurn()`
+  - `checkGameEnd()`
+  - `declareWinner()`
 
-#### **1. Player**
-- Свойства:
-  - `id`: string
-  - `secret`: string
+#### **2. Player**
+- Properties:
+  - `name`: string
+  - `department`: string
+  - `reputation`: int
+  - `money`: int
+  - `ceoTrust`: int
+  - `hand`: vector<Card>
+  - `allies`: vector<CharacterCard>
+- Methods:
+  - `drawCard()`
+  - `playCard(Card)`
+  - `addAlly(CharacterCard)`
+  - `removeAlly(CharacterCard)`
+  - `updateStats(int, int, int)`
+
+#### **3. Deck**
+- Properties:
+  - `cards`: vector<Card>
+- Methods:
+  - `shuffle()`
+  - `drawCard()`
+  - `addCard(Card)`
+  - `removeCard(Card)`
+
+#### **4. Card** (Abstract)
+- Properties:
+  - `name`: string
+  - `description`: string
+  - `type`: string
+- Methods:
+  - `execute(Player)`
+  - `isPlayable(Player)`
+
+#### **5. CharacterCard** (inherits Card)
+- Properties:
+  - `type`: 'character'
+  - `department`: string
   - `reputation`: int
   - `money`: int
   - `trust`: int
-  - `hand`: PlayerHand
-- Методы:
-  - `getId()`: string
-  - `loseMoney(int)`
-  - `loseReputation(int)`
-  - `loseTrust(int)`
-  - `gainTrust(int)`
-  - `gainReputation(int)`
-  - `gainMoney(int)`
-  - `setName(string)`
-  - `getPlayerName()`: string
+- Methods:
+  - `isPossibleToPlay(Player)`
+  - `execute(Player)`
 
-#### **2. PlayerHand**
-- Свойства:
-  - `cards`: Card[]
-- Методы:
-  - `getCards()`: Card[]
-  - `addCard(Card)`
-  - `playCard(int): Card`
-  - `getLeverageCards()`: LeverageCard[]
+#### **6. ActionCard** (inherits Card)
+- Properties:
+  - `type`: 'action'
+  - `reputationEffect`: int
+  - `moneyEffect`: int
+  - `trustEffect`: int
+- Methods:
+  - `isPossibleToPlay(Player)`
+  - `execute(Player)`
 
-#### **3. Card**
-- Свойства:
-  - `id`: int
-- Методы:
-  - `type`: 'action' | 'character' | 'leverage' | 'end'
-  - `name`: string
-  - `getId()`: int
-  - Виртуальные методы:
-    - `isPossibleToPlay(&Player)`
-    - `execute(&Player)`
+#### **7. GameState**
+- Properties:
+  - `currentPhase`: Phase
+  - `activePlayer`: Player*
+  - `targetPlayer`: Player*
+  - `currentCard`: Card*
+- Methods:
+  - `updatePhase(Phase)`
+  - `setActivePlayer(Player*)`
+  - `setTargetPlayer(Player*)`
+  - `setCurrentCard(Card*)`
 
-#### **4. AI**
-- Методы:
-  - `getName()`: string // всегда возвращает 'AI'
-  - `makeMove(move: Move)`
-
-#### **5. Game**
-- Свойства:
-  - `players`: Player[]
-  - `stack`: Stack
-  - `playersQueue`: string[]
-- Методы:
-  - `initialize(UserPlayerInput[])`
-  - `getPlayers()`: &Player[]
-  - `offerMove()`: Move
-  - `next()`
-  - `isEnd()`
-  - `determineWinner()`: &Player
-
-#### **6. Stack**
-- Свойства:
-  - `cards`: Card[]
-- Методы:
-  - `popCard()`: Card
-  - `shuffle()`
-  - `fetchPlayersCards(int)`
-
----
-
-### Дополнительные классы системы
-
-#### **7. UserPlayerInput**
-- Свойства:
-  - `playerName`: string
-  - `playerType`: 'ai' | 'user'
-
-#### **8. Move**
-- Свойства:
-  - `actor`: &Player
+#### **8. TradeOffer**
+- Properties:
   - `card`: Card
-  - `hasPlayed`: bool
-- Методы:
+  - `seller`: Player*
+  - `buyer`: Player*
+  - `price`: int
+- Methods:
   - `getActor()`
   - `isAbleToAccept()`: bool
   - `accept()`
@@ -94,101 +99,78 @@
   - `useLeverage(&LeverageCard, &Player)`
 
 #### **9. CardPurchase**
-- Свойства:
+- Properties:
   - `card`: Card
   - `seller`: &Player
   - `buyer`: &Player
   - `price`: int
-- Методы:
+- Methods:
   - `validate()`
   - `execute()`
 
 #### **10. LeverageAttack**
-- Свойства:
+- Properties:
   - `card`: &LeverageCard
   - `attacker`: &Player
   - `victim`: &Player
-- Методы:
+- Methods:
   - `buyout(int)`
   - `accept()`
 
-#### **11. EndCard** (наследует Card)
-- Свойства:
+#### **11. EndCard** (inherits Card)
+- Properties:
   - `type`: 'end'
-- Методы:
+- Methods:
   - `execute(&Player)`
 
-#### **12. LeverageCard** (наследует Card)
-- Свойства:
+#### **12. LeverageCard** (inherits Card)
+- Properties:
   - `type`: 'leverage'
   - `reputationDamage`: int
   - `moneyDamage`: int
   - `trustDamage`: int
-- Методы:
+- Methods:
   - `isPossibleToPlay(&Player)`
   - `execute(&Player)`
 
-#### **13. AllyReputationConditionActionCard** (наследует ActionCard)
-- Свойства:
+#### **13. AllyReputationConditionActionCard** (inherits ActionCard)
+- Properties:
   - `minAllyReputation`: int
-- Методы:
+- Methods:
   - `isPossibleToPlay(&Player)`
   - `execute(&Player)`
 
-#### **14. OwnReputationBeforeMoveConditionActionCard** (наследует ActionCard)
-- Свойства:
+#### **14. OwnReputationBeforeMoveConditionActionCard** (inherits ActionCard)
+- Properties:
   - `minReputation`: int
-- Методы:
+- Methods:
   - `isPossibleToPlay(&Player)`
   - `execute(&Player)`
 
-#### **15. OwnReputationAfterMoveConditionActionCard** (наследует ActionCard)
-- Свойства:
+#### **15. OwnReputationAfterMoveConditionActionCard** (inherits ActionCard)
+- Properties:
   - `minReputation`: int
-- Методы:
+- Methods:
   - `isPossibleToPlay(&Player)`
   - `execute(&Player)`
 
-#### **16. AlreadyPlayedACardConditionActionCard** (наследует ActionCard)
-- Свойства:
+#### **16. AlreadyPlayedACardConditionActionCard** (inherits ActionCard)
+- Properties:
   - `forbiddenCard`: Card
-- Методы:
+- Methods:
   - `isPossibleToPlay(&Player)`
   - `execute(&Player)`
 
-#### **17. SameDepartmentConditionActionCard** (наследует ActionCard)
-- Свойства:
+#### **17. SameDepartmentConditionActionCard** (inherits ActionCard)
+- Properties:
   - `department`: string
-- Методы:
+- Methods:
   - `isPossibleToPlay(&Player)`
   - `execute(&Player)`
 
-#### **18. TrustBeforeConditionLeverageCard** (наследует LeverageCard)
-- Свойства:
+#### **18. TrustBeforeConditionLeverageCard** (inherits LeverageCard)
+- Properties:
   - `minTrust`: int
-- Методы:
-  - `isPossibleToPlay(&Player)`
-  - `execute(&Player)`
-
-#### **19. CharacterCard** (наследует Card)
- - Свойства:
-  - `reputation`: int
-  - `money`: int
-  - `department`: string
-  - `type`: 'character'
- - Методы:
-  - `isPossibleToPlay(&Player)`
-  - `execute(&Player)`
-
-#### **20. ActionCard** (наследует Card)
-- Свойства:
-  - `type`: 'action'
-  - `reputationDamage`: int
-  - `moneyDamage`: int
-  - `trustDamage`: int
-  - `trustGain`: int
-  - `reputationGain`: int
-  - `moneyGain`: int
-- Методы:
+- Methods:
   - `isPossibleToPlay(&Player)`
   - `execute(&Player)`

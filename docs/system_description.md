@@ -1,149 +1,151 @@
-## Общее описание системы
+# System Description
 
-Система представляет собой консольное приложение на C++, реализующее карточную игру, в которой игроки соревнуются за доверие CEO. Игроки по очереди тянут карты из колоды, которые могут быть трех типов: "Персонажи", "Действия" и "Leverage-карты". Цель игры - набрать наибольшее количество "Доверия CEO" к моменту выпадения карты "Смерть CEO". Игра заканчивается, когда выпадает карта "Смерть CEO", и победителем объявляется игрок с наибольшим показателем доверия. В случае равенства доверия, учитываются показатели "Репутация" и "Деньги" соответственно.
+## General System Overview
 
-## Требования к системе
+The system is a console-based C++ application implementing a card game where players compete for the CEO's trust. Players take turns drawing cards from a deck, which can be of three types: "Characters", "Actions", and "Leverage cards". The goal of the game is to accumulate the highest amount of "CEO Trust" by the time the "CEO Death" card is drawn. The game ends when the "CEO Death" card is drawn, and the winner is declared as the player with the highest trust score. In case of a tie in trust, "Reputation" and "Money" scores are considered respectively.
 
-### Функциональные требования:
+## System Requirements
 
-Система должна успешно реализовывать “Правила Игры”, описанные в файле “rules.md”. Реализация не должна им противоречить. Описание всех карт находится там.
+### Functional Requirements:
 
-### Инициализация игры:
+The system must successfully implement the "Game Rules" described in the "rules.md" file. The implementation must not contradict them. All card descriptions are located there.
 
-*   Запрос количества игроков (минимум 2).
-*   Создание колоды карт (персонажи, действия, leverage). Карта “Смерть CEO” обязательно должна находиться в последних 25% карт
-*   Раздача стартовых карт игрокам (карта персонажа с начальными показателями).
-*   Определение порядка хода игроков с помощью случайного числа
+### Game Initialization:
 
-### Основной игровой цикл:
+* Request number of players (minimum 2)
+* Create card deck (characters, actions, leverage). The "CEO Death" card must be in the last 25% of the deck
+* Deal starting cards to players (character card with initial stats)
+* Determine player turn order using random number
 
-*   Вывод текущего состояния игры (информация об игроках, их показателях, но не карты которые у них есть на руках).
-*   Предоставление хода текущему игроку.
-*   Вытягивание игроком карты из колоды.
-*   Проверка окончания игры (выпадение карты "Смерть CEO").
-*   Передача хода следующему игроку.
+### Main Game Loop:
 
-### Обработка выпавшей карты:
+* Display current game state (player information, their stats)
+* Provide turn to current player
+* Player draws a card from the deck
+* Check for game end (drawing of "CEO Death" card)
+* Pass turn to next player
 
-*   Персонаж: Предложить игроку взять карту персонажа в союзники (если из его отдела) или продать другому игроку.
-*   Действие: Предложить игроку сыграть карту или продать другому игроку.
-*   Leverage-карта: Добавить карту в "руку" игрока (скрытая информация).
-*   Реализация торговли между игроками (продажа карт персонажей и действий).
-*   Применение эффектов карт на показатели игроков (репутация, деньги, доверие CEO).
-*   Проверка условий применения эффектов карт (например, наличие союзника с определенной репутацией).
+### Card Processing:
 
-### Использование Leverage-карт:
+* Character: Offer player to take character card as ally (if from their department) or sell to another player
+* Action: Offer player to play the card or sell to another player
+* Leverage card: Add card to player's "hand" 
+* Implement trading between players (selling character and action cards)
+* Apply card effects to player stats (reputation, money, CEO trust)
+* Check conditions for applying card effects (e.g., having an ally with certain reputation)
 
-*   Возможность для игрока применить Leverage-карту против другого игрока (снижение репутации или доверия).
-*   Возможность для игрока, против которого применена Leverage-карта, предложить откуп.
-*   Реализация логики откупа (игрок решает, принять откуп или применить карту).
+### Leverage Card Usage:
 
-### Определение победителя:
+* Allow player to use Leverage card against another player (reducing reputation or trust)
+* Allow player targeted by Leverage card to offer buyout
+* Implement buyout logic (player decides to accept buyout or apply card)
 
-*   После выпадения карты "Смерть CEO" определение игрока с наибольшим доверием CEO.
-*   В случае равенства доверия, сравнение репутации.
-*   В случае равенства репутации, сравнение количества денег.
-*   Объявление победителя (или ничьей).
+### Winner Determination:
 
-### Обработка некорректного ввода:
+* After drawing "CEO Death" card, determine player with highest CEO trust
+* In case of trust tie, compare reputation
+* In case of reputation tie, compare money amount
+* Declare winner (or draw)
 
-*   Предотвращение ввода некорректных значений (например, отрицательное количество игроков).
-*   Обработка ошибок при выборе действий (например, попытка сыграть карту, на которую не хватает ресурсов)
+### Invalid Input Handling:
 
-### Реализация простого ИИ
+* Prevent invalid input (e.g., negative number of players)
+* Handle action selection errors (e.g., attempting to play card without sufficient resources)
 
-#### Основные правила принятия решений ИИ:
+### Simple AI Implementation
 
-##### Взятие карты персонажа:
+#### Basic AI Decision Rules:
 
-*   ИИ всегда берет карту персонажа в союзники, если она из его отдела.
-*   Иначе – пытается продать ее другим игрокам по фиксированной цене.
+##### Taking Character Card:
 
-##### Игра карты действия:
+* AI always takes character card as ally if from its department
+* Otherwise - tries to sell it to other players at fixed price
 
-*   ИИ играет карту действия, если она увеличивает его доверие CEO.
-*   Иначе – пытается продать ее другим игрокам.
+##### Playing Action Card:
 
-##### Использование Leverage-карты:
+* AI plays action card if it increases CEO trust
+* Otherwise - tries to sell it to other players
 
-*   ИИ использует Leverage-карту против игрока с самым высоким доверием CEO.
-*   Не предлагает откуп.
+##### Using Leverage Card:
 
-##### Откуп:
+* AI uses Leverage card against player with highest CEO trust
+* Does not offer buyout
 
-*   Если против ИИ применили Leverage-карту, ИИ всегда отказывается от откупа.
-*   ИИ устанавливает фиксированную цену на продаваемые карты.
-*   При покупке карт ИИ всегда соглашается на цену, если у него достаточно денег.
+##### Buyout:
 
-### Нефункциональные требования:
+* If Leverage card is used against AI, AI always refuses buyout
+* AI sets fixed price for selling cards
+* When buying cards, AI always agrees to price if has enough money
 
-*   Производительность: Игра должна работать быстро и плавно.
-*   Удобство использования: Консольный интерфейс должен быть интуитивно понятным и простым в использовании.
-*   Надежность: Система должна быть устойчивой к ошибкам и сбоям.
-*   Поддержка: Код должен быть хорошо документирован и протестирован, чтобы его было легко поддерживать и расширять.
+### Non-functional Requirements:
 
-## Сценарии использования
+* Performance: Game should run quickly and smoothly
+* Usability: Console interface should be intuitive and easy to use
+* Reliability: System should be resistant to errors and crashes
+* Support: Code should be well-documented and tested for easy maintenance and expansion
 
-### Начало новой игры:
+## Use Cases
 
-*   Система запрашивает режим игры (2+ игроков или игра с ИИ). Если пользователь выбирает ИИ, см. П. 7
-*   Система запрашивает количество игроков.
-*   Система создает колоду карт.
-*   Система раздает стартовые карты игрокам.
-*   Система определяет порядок хода игроков.
+### Starting New Game:
 
-### Ход игрока:
+* System requests game mode (2+ players or AI game). If user chooses AI, see Section 7
+* System requests number of players
+* System creates card deck
+* System deals starting cards to players
+* System determines player turn order
 
-*   Система отображает текущее состояние игры.
-*   Система предлагает игроку вытянуть карту.
-*   Игрок выбирает действие "вытянуть карту".
-*   Система вытягивает карту из колоды.
-*   Система отображает информацию о выпавшей карте.
+### Player Turn:
 
-### Обработка карты персонажа:
+* System displays current game state
+* System offers player to draw a card
+* Player chooses "draw card" action
+* System draws card from deck
+* System displays information about drawn card
 
-*   Система предлагает игроку взять карту в союзники (если из его отдела) или продать другому игроку.
-*   Игрок выбирает действие: "взять в союзники", "продать" или "ничего не делать".
-*   Если игрок выбирает "взять в союзники", система добавляет карту персонажа к его союзникам и применяет эффекты (+5% от репутации союзника).
-*   Если игрок выбирает "продать", система запрашивает имя игрока, которому продается карта и цену.
-*   После согласования цены, показатели игроков изменяются соответствующим образом.
+### Processing Character Card:
 
-### Обработка карты действия:
+* System offers player to take card as ally (if from their department) or sell to another player
+* Player chooses action: "take as ally", "sell" or "do nothing"
+* If player chooses "take as ally", system adds character card to their allies and applies effects (+5% from ally's reputation)
+* If player chooses "sell", system requests name of player to sell to and price
+* After price agreement, player stats are modified accordingly
 
-*   Система предлагает игроку сыграть карту или продать другому игроку.
-*   Игрок выбирает действие: "сыграть" или "продать".
-*   Если игрок выбирает "сыграть", система применяет эффекты карты к показателям игрока и/или других игроков.
-*   Если игрок выбирает "продать", происходит аналогичный процесс, как и с картой персонажа.
+### Processing Action Card:
 
-### Использование Leverage-карты:
+* System offers player to play card or sell to another player
+* Player chooses action: "play" or "sell"
+* If player chooses "play", system applies card effects to player stats and/or other players
+* If player chooses "sell", similar process as with character card occurs
 
-*   Игрок выбирает действие "использовать Leverage-карту".
-*   Система отображает список доступных Leverage-карт.
-*   Игрок выбирает карту и игрока, против которого она будет применена.
-*   Система предлагает игроку, против которого применена карта, возможность откупа.
-*   Игрок принимает или отклоняет откуп.
-*   В зависимости от решения игрока, применяются эффекты карты или происходит откуп.
+### Using Leverage Card:
 
-### Завершение игры и определение победителя:
+* Player chooses "use Leverage card" action
+* System displays list of available Leverage cards
+* Player chooses card and player to use it against
+* System offers targeted player buyout option
+* Player accepts or declines buyout
+* Depending on player's decision, card effects are applied or buyout occurs
 
-*   Выпадает карта "Смерть CEO".
-*   Система определяет игрока с наибольшим доверием CEO.
-*   В случае равенства доверия, система сравнивает репутацию.
-*   В случае равенства репутации, система сравнивает количество денег.
-*   Система объявляет победителя или ничью.
+### Game End and Winner Determination:
 
-## Игра с ИИ
+* "CEO Death" card is drawn
+* System determines player with highest CEO trust
+* In case of trust tie, system compares reputation
+* In case of reputation tie, system compares money amount
+* System declares winner or draw
 
-При входе в игру игрок выбирает игру с ИИ
+## Playing with AI
 
-ИИ становится игроком внутри игры и дальше сценарий работает так же как в предыдущих пунктах
+When entering the game, player chooses to play with AI
 
-## Устранение возможных неоднозначностей
+AI becomes a player in the game and the scenario works the same as in previous sections
 
-*   Показатели: Значения репутации, денег и доверия CEO всегда должны быть целыми числами в диапазоне от 0 до 100. Если эффект карты приводит к значению ниже 0, показатель остается равным 0.
-*   Союзники: Игрок может иметь несколько союзников одновременно. Эффекты от союзников суммируются.
-*   Торговля: Цена карты определяется по договоренности между игроками. Система не устанавливает фиксированные цены.
-*   Leverage-карты: Игрок может иметь несколько Leverage-карт на руках. Он может использовать их в любой момент своего хода (после вытягивания карты).
-*   Условия применения карт: Если для применения эффекта карты требуется выполнение определенных условий (например, наличие союзника с определенной репутацией), система должна проверять эти условия перед применением эффекта.
+## Resolving Potential Ambiguities
 
-Этот документ предоставляет общее описание системы, требования к ней и сценарии использования.
+* Stats: Reputation, money, and CEO trust values must always be integers in range from 0 to 100. If card effect leads to value below 0, stat remains at 0
+* Allies: Player can have multiple allies simultaneously. Ally effects are summed
+* Trading: Card price is determined by agreement between players. System does not set fixed prices
+* Leverage cards: Player can have multiple Leverage cards in hand. Can use them at any point during their turn (after drawing card)
+* Card effect conditions: If card effect requires certain conditions (e.g., having ally with certain reputation), system must check these conditions before applying effect
+
+This document provides general system description, system requirements, and use cases.

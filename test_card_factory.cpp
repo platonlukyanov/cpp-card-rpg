@@ -12,34 +12,34 @@ protected:
 };
 
 TEST_F(CardFactoryTest, CreateCharacterCard) {
-    auto card = factory->createCard("Тимлид", 1);
+    auto card = factory->createCard("Team Lead", 1);
     ASSERT_NE(card, nullptr);
     EXPECT_EQ(card->getType(), Card::Type::CHARACTER);
-    EXPECT_EQ(card->getName(), "Тимлид");
+    EXPECT_EQ(card->getName(), "Team Lead");
 }
 
 TEST_F(CardFactoryTest, CreateActionCard) {
-    auto card = factory->createCard("Подставить коллегу и получить повышение", 1);
+    auto card = factory->createCard("Frame a colleague and get a promotion", 1);
     ASSERT_NE(card, nullptr);
     EXPECT_EQ(card->getType(), Card::Type::ACTION);
-    EXPECT_EQ(card->getName(), "Подставить коллегу и получить повышение");
+    EXPECT_EQ(card->getName(), "Frame a colleague and get a promotion");
 }
 
 TEST_F(CardFactoryTest, CreateLeverageCard) {
-    auto card = factory->createCard("Раскрыть статус миграции двоюродной сестры", 1);
+    auto card = factory->createCard("Reveal the migration status of a cousin", 1);
     ASSERT_NE(card, nullptr);
     EXPECT_EQ(card->getType(), Card::Type::LEVERAGE);
-    EXPECT_EQ(card->getName(), "Раскрыть статус миграции двоюродной сестры");
+    EXPECT_EQ(card->getName(), "Reveal the migration status of a cousin");
 }
 
 TEST_F(CardFactoryTest, CreateEndCard) {
-    auto card = factory->createCard("Смерть CEO", 1);
+    auto card = factory->createCard("CEO Death", 1);
     ASSERT_NE(card, nullptr);
     EXPECT_EQ(card->getType(), Card::Type::END);
-    EXPECT_EQ(card->getName(), "Смерть CEO");
+    EXPECT_EQ(card->getName(), "CEO Death");
 }
 
 TEST_F(CardFactoryTest, CreateUnknownCardReturnsNullptr) {
-    auto card = factory->createCard("Неизвестная карта", 1);
+    auto card = factory->createCard("Unknown Card", 1);
     EXPECT_EQ(card, nullptr);
 } 

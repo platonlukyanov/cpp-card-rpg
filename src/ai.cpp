@@ -12,24 +12,24 @@ std::unique_ptr<Move> AI::makeMove(Stack& stack) {
         return nullptr;
     }
 
-    // Смотрим верхнюю карту, не забирая её из стека
+    // Look at the top card, not taking it from the stack
     auto card = stack.peekCard();
     if (!card) {
         return nullptr;
     }
 
-    // Проверяем, можно ли сыграть карту
+    // Check if the card is possible to play
     if (!card->isPossibleToPlay(*this)) {
         return nullptr;
     }
 
-    // Проверяем отдел для карт персонажей
+    // Check the department of the character card
     if (auto characterCard = dynamic_cast<CharacterCard*>(card)) {
         if (characterCard->getDepartment() != getDepartment()) {
             return nullptr;
         }
     }
 
-    // Если все проверки пройдены, забираем карту из стека
+    // if all checks passed, take the card from the stack
     return std::make_unique<Move>(*this, stack.drawCard());
 } 

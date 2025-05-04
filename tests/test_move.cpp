@@ -9,8 +9,8 @@ protected:
     void SetUp() override {
         factory = std::make_unique<CardFactory>();
         player = std::make_unique<Player>("test_id", "test_secret");
-        player->setDepartment("разработка");
-        card = factory->createCard("Тимлид", 1);
+        player->setDepartment("development");
+        card = factory->createCard("Team Lead", 1);
     }
 
     std::unique_ptr<CardFactory> factory;
@@ -44,8 +44,8 @@ TEST_F(MoveTest, TradeUpdatesPlayerMoney) {
     Move move(*player, std::move(card));
     Player buyer("buyer_id", "buyer_secret");
 
-    buyer.setDepartment("разработка");
-    buyer.gainMoney(20); // Даем покупателю начальные деньги
+    buyer.setDepartment("development");
+    buyer.gainMoney(20); // Give the buyer initial money
     int initialMoney = buyer.getMoney();
     move.trade(10, buyer);
     EXPECT_EQ(buyer.getMoney(), initialMoney - 10);
@@ -54,7 +54,7 @@ TEST_F(MoveTest, TradeUpdatesPlayerMoney) {
 TEST_F(MoveTest, CantTradeIfCardIsntPossibleToPlay) {
     Move move(*player, std::move(card));
     Player buyer("buyer_id", "buyer_secret");
-    buyer.setDepartment("финансы"); // can't buy a card of a character from different department
+    buyer.setDepartment("finance"); // can't buy a card of a character from different department
     buyer.loseMoney(100);
     buyer.gainMoney(20);
     move.trade(10, buyer);

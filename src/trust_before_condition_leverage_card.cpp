@@ -10,7 +10,7 @@ int TrustBeforeConditionLeverageCard::getMinTrust() const {
 }
 
 bool TrustBeforeConditionLeverageCard::isPossibleToPlay(const Player& player) const {
-    return true;  // Карта рычага всегда может быть сыграна
+    return true; // Leverage cards can always be played
 }
 
 void TrustBeforeConditionLeverageCard::executeOnPlayer(Player& player) {

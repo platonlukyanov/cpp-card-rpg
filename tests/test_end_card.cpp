@@ -22,5 +22,5 @@ TEST_F(EndCardTest, ExecuteDoesNotUpdatePlayerStats) {
     
     EXPECT_EQ(player->getReputation(), 0);
     EXPECT_EQ(player->getMoney(), 0);
-    EXPECT_EQ(player->getTrust(), 10); // Базовое доверие
+    EXPECT_EQ(player->getTrust(), 10); // Base trust
 } 

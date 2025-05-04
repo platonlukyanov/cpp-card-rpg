@@ -8,42 +8,42 @@ const int GAME_LENGTH = 37;
 
 Game::Game() : stack_(std::make_unique<Stack>()) {
     std::array<std::string, GAME_LENGTH - 1> cards = {
-      "Тимлид",
-      "Финансовый консультант",
-      "Юрист",
-      "Менеджер по продажам",
-      "Разработчик",
-      "Финансовый аналитик",
-      "Специалист по PR",
-      "Маркетолог",
-      "Тестировщик",
-      "Бухгалтер",
-      "Юрисконсульт",
-      "Продажный агент",
-      "Веб-разработчик",
-      "Финансовый директор",
-      "Специалист по интеллектуальной собственности",
-      "Менеджер по маркетингу",
-      "Архитектор программного обеспечения",
-      "Финансовый контроллер",
-      "Судебный юрист", 
-      "Директор по продажам",
-      "Разработка",
-      "Подставить коллегу и получить повышение",
-      "Презентовать большой проект",
-      "Продать информацию о бизнесе конкурентам",
-      "Уволить сотрудника",
-      "Провести корпоративное мероприятие",
-      "Получить кредит",
-      "Создать новый отдел",
-      "Нанять нового сотрудника",
-      "Провести аудит",
-      "Создать новый продукт",
-      "Раскрыть статус миграции двоюродной сестры",
-      "Рассказать о твите из прошлого десятелетия",
-      "Вызвать налоговую инспекцию",
-      "Раскрыть секретную информацию",
-      "Обвинить в плагиате",
+      "Team Lead",
+      "Financial Consultant",
+      "Lawyer",
+      "Sales Manager",
+      "Developer",
+      "Financial Analyst",
+      "PR Specialist",
+      "Marketer",
+      "Tester",
+      "Accountant",
+      "Legal Counsel",
+      "Sales Agent",
+      "Web Developer",
+      "Chief Financial Officer",
+      "Intellectual Property Specialist",
+      "Marketing Manager",
+      "Software Architect",
+      "Financial Controller",
+      "Litigation Lawyer", 
+      "Sales Director",
+      "Development",
+      "Frame a colleague and get a promotion",
+      "Present a big project",
+      "Sell business information to competitors",
+      "Fire an employee",
+      "Organize a corporate event",
+      "Get a loan",
+      "Create a new department",
+      "Hire a new employee",
+      "Conduct an audit",
+      "Create a new product",
+      "Reveal the migration status of a cousin",
+      "Tell about a tweet from the last decade",
+      "Call the tax inspectorate",
+      "Reveal secret information",
+      "Accuse of plagiarism",
     };
 
     for (int i = 0; static_cast<size_t>(i) < cards.size(); ++i) {
@@ -51,9 +51,9 @@ Game::Game() : stack_(std::make_unique<Stack>()) {
         stack_->pushCard(std::move(card));
     }
     stack_->shuffle();
-    std::unique_ptr<Card> endCard = CardFactory::createCard("Смерть CEO", cards.size() + 1);
+    std::unique_ptr<Card> endCard = CardFactory::createCard("CEO Death", cards.size() + 1);
 
-    // we need to insert end card to the last 75% of the game
+    // we need to insert end card to the last 25% of the game
     int endCardIndex = static_cast<int>(GAME_LENGTH * 75 / 100);
     stack_->insertCard(std::move(endCard), GAME_LENGTH - endCardIndex);
 }

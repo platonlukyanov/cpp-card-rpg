@@ -5,7 +5,7 @@
 class AllyTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        character = std::make_unique<CharacterCard>(1, "Тестовый персонаж", 30, 20, "разработка");
+        character = std::make_unique<CharacterCard>(1, "Test character", 30, 20, "development");
         ally = std::make_unique<Ally>(*character);
     }
 
@@ -14,7 +14,7 @@ protected:
 };
 
 TEST_F(AllyTest, GetNameReturnsCorrectValue) {
-    EXPECT_EQ(ally->getName(), "Тестовый персонаж");
+    EXPECT_EQ(ally->getName(), "Test character");
 }
 
 TEST_F(AllyTest, GetReputationReturnsCorrectValue) {
@@ -26,5 +26,5 @@ TEST_F(AllyTest, GetMoneyReturnsCorrectValue) {
 }
 
 TEST_F(AllyTest, GetDepartmentReturnsCorrectValue) {
-    EXPECT_EQ(ally->getDepartment(), "разработка");
+    EXPECT_EQ(ally->getDepartment(), "development");
 } 

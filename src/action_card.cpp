@@ -9,7 +9,7 @@ ActionCard::ActionCard(int id, const std::string& name,
       trustChange_(trustChange) {}
 
 bool ActionCard::isPossibleToPlay(const Player& player) const {
-    // По умолчанию карту действия можно сыграть
+    // by default, action card can be played
     bool canPlayDueToReputation = player.getReputation() >= -reputationChange_;
     bool canPlayDueToMoney = player.getMoney() >= -moneyChange_;
     bool canPlayDueToTrust = player.getTrust() >= -trustChange_;

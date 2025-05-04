@@ -1,129 +1,155 @@
+## Testing Strategy for "Corporate Throne" Card Game
 
-## План тестирования карточной игры "Доверие CEO"
+### 1. Testing Objectives
 
-### 1. Цели тестирования
+*   Ensure the system meets all functional and non-functional requirements described in the documentation.
+*   Verify correct implementation of game rules.
+*   Validate proper handling of edge cases and error conditions.
+*   Ensure system stability and performance.
+*   Verify AI behavior and decision-making logic.
 
-*   Убедиться, что система соответствует всем функциональным и нефункциональным требованиям, описанным в документации.
-*   Проверить корректность реализации правил игры.
-*   Выявить и исправить ошибки в коде.
-*   Оценить производительность, удобство использования и надежность системы.
+### 2. Testing Levels
 
-### 2. Объекты тестирования
+#### 2.1 Unit Testing
 
-*   Все функциональные модули системы:
-    *   Инициализация игры.
-    *   Основной игровой цикл.
-    *   Обработка выпавших карт (персонажи, действия, leverage-карты).
-    *   Торговля между игроками.
-    *   Использование Leverage-карт.
-    *   Определение победителя.
-    *   Обработка некорректного ввода.
-    *   Логика ИИ (если применимо).
-*   Пользовательский интерфейс (консольный).
+*   Test individual components and classes.
+*   Verify correct implementation of game mechanics.
+*   Test card effects and their application.
+*   Validate player stat calculations.
+*   Test AI decision-making algorithms.
 
-### 3. Типы тестирования
+#### 2.2 Integration Testing
 
-*   **Модульное тестирование:** Тестирование отдельных функций и классов для проверки их корректности.
-*   **Интеграционное тестирование:** Тестирование взаимодействия между различными модулями системы.
-*   **Системное тестирование:** Тестирование системы в целом для проверки соответствия требованиям.
-*   **Тестирование производительности:** Оценка времени отклика системы, использования памяти и других ресурсов.
-*   **Тестирование удобства использования:** Оценка интуитивности и простоты использования консольного интерфейса.
+*   Test interaction between different components.
+*   Verify correct game flow.
+*   Test trading system.
+*   Validate card deck management.
+*   Test player turn management.
 
-### 4. Тестовое окружение
+#### 2.3 System Testing
 
-*   Операционная система: Linux, Ubuntu 20.1
-*   Компилятор C++: GCC
-*   Необходимые библиотеки: libgtest 
-*   Тестовые данные: Набор карт и сценариев использования.
+*   Test complete game scenarios.
+*   Verify proper game initialization.
+*   Test game end conditions.
+*   Validate winner determination.
+*   Test error handling and recovery.
 
-### 5. Подходы к тестированию
+### 3. Test Environment
 
-*   **Автоматизированное тестирование:** Использование инструментов для автоматического выполнения тестов и проверки результатов (Google Test).
-*   **Ручное тестирование:** Выполнение тестов вручную для проверки удобства использования и выявления ошибок, которые сложно обнаружить автоматическими тестами.
+*   Development environment: Linux.
+*   Compiler: GCC.
+*   Testing framework: Google Test.
+*   Build system: Make.
 
-### 6. Этапы тестирования
+### 4. Test Cases Organization
 
-1.  **Подготовка тестовых данных:** Создание набора карт и сценариев использования, охватывающих все возможные ситуации в игре.
-2.  **Модульное тестирование:** Тестирование отдельных функций и классов.
-3.  **Интеграционное тестирование:** Тестирование взаимодействия между модулями.
-4.  **Системное тестирование:** Тестирование системы в целом.
-6.  **Тестирование производительности:** Оценка времени отклика системы.
-7.  **Тестирование удобства использования:** Оценка удобства консольного интерфейса.
+#### 4.1 Game Initialization Tests
 
-### 7. Примеры тестовых случаев
+*   Player creation.
+*   Deck creation and shuffling.
+*   Initial card distribution.
+*   Turn order determination.
 
-#### 7.1. Инициализация игры
+#### 4.2 Card Effect Tests
 
-*   **Тест:** Запуск игры с двумя игроками.
-    *   **Ожидаемый результат:** Игра успешно инициализируется, игрокам раздаются стартовые карты, определяется порядок хода.
-*   **Тест:** Запуск игры с максимальным количеством игроков.
-    *   **Ожидаемый результат:** Игра успешно инициализируется, игрокам раздаются стартовые карты, определяется порядок хода.
-*   **Тест:** Попытка запуска игры с некорректным количеством игроков (меньше 2).
-    *   **Ожидаемый результат:** Система выдает сообщение об ошибке и предлагает ввести корректное значение.
-*   **Тест:** Проверка, что карта "Смерть CEO" находится в последних 25% колоды.
-    *   **Ожидаемый результат:** После инициализации игры карта "Смерть CEO" находится в нужной части колоды.
+*   Character card effects.
+*   Action card effects.
+*   Leverage card effects.
+*   End card effects.
 
-#### 7.2. Ход игрока
+#### 4.3 Player Interaction Tests
 
-*   **Тест:** Игрок вытягивает карту.
-    *   **Ожидаемый результат:** Игроку выдается карта из колоды, колода уменьшается на одну карту.
+*   Card drawing.
+*   Card playing.
+*   Trading.
+*   Ally management.
 
-#### 7.3. Обработка карты персонажа
+#### 4.4 AI Behavior Tests
 
-*   **Тест:** Игроку выпадает карта персонажа из его отдела.
-    *   **Ожидаемый результат:** Система предлагает игроку взять карту в союзники. Игрок соглашается. К показателям игрока добавляется 10% от репутации союзника.
-*   **Тест:** Игроку выпадает карта персонажа не из его отдела.
-    *   **Ожидаемый результат:** Система предлагает игроку продать карту другому игроку. Игрок продает карту. Показатели игроков изменяются в соответствии с ценой продажи.
-*   **Тест:** Игрок отказывается от карты персонажа.
-    *   **Ожидаемый результат:** Карта сбрасывается.
+*   Decision-making logic.
+*   Trading behavior.
+*   Card usage strategy.
+*   Buyout handling.
 
-#### 7.4. Обработка карты действия
+### 5. Test Data
 
-*   **Тест:** Игрок выбирает сыграть карту действия.
-    *   **Ожидаемый результат:** Эффекты карты применяются к показателям игрока и/или других игроков.
-*   **Тест:** Игрок выбирает продать карту действия.
-    *   **Ожидаемый результат:** Карта продается другому игроку. Показатели игроков изменяются в соответствии с ценой продажи.
+*   Predefined test decks.
+*   Sample player configurations.
+*   Test scenarios for different game situations.
+*   Edge case data sets.
 
-#### 7.5. Использование Leverage-карты
+### 6. Test Execution
 
-*   **Тест:** Игрок использует Leverage-карту против другого игрока.
-    *   **Ожидаемый результат:** Система предлагает игроку, против которого применена карта, возможность откупа.
-        *   Игрок соглашается на откуп.
-            *   **Ожидаемый результат:** Карта сбрасывается, показатели игроков изменяются в соответствии с условиями откупа.
-        *   Игрок отказывается от откупа.
-            *   **Ожидаемый результат:** Эффекты карты применяются к показателям игрока, против которого она была применена.
+*   Automated test execution through Make.
+*   Regular test runs during development.
+*   Full test suite before releases.
+*   Performance testing under load.
 
-#### 7.6. Завершение игры и определение победителя
+### 7. Example Test Cases
 
-*   **Тест:** Выпадает карта "Смерть CEO".
-    *   **Ожидаемый результат:** Система определяет игрока с наибольшим доверием CEO и объявляет его победителем.
-*   **Тест:** У нескольких игроков одинаковое доверие CEO.
-    *   **Ожидаемый результат:** Система сравнивает репутацию. Игрок с наибольшей репутацией объявляется победителем.
-*   **Тест:** У нескольких игроков одинаковое доверие CEO и репутация.
-    *   **Ожидаемый результат:** Система сравнивает количество денег. Игрок с наибольшим количеством денег объявляется победителем.
-*   **Тест:** У нескольких игроков одинаковое доверие CEO, репутация и количество денег.
-    *   **Ожидаемый результат:** Система объявляет ничью.
+#### 7.1. Game Initialization
 
-#### 7.7. Тестирование ИИ
+*   **Test:** Player creation.
+    *   **Expected result:** Game starts with two players.
+*   **Test:** Deck creation and shuffling.
+    *   **Expected result:** Deck is created and shuffled.
+*   **Test:** Initial card distribution.
+    *   **Expected result:** Initial cards are distributed to players.
+*   **Test:** Turn order determination.
+    *   **Expected result:** Players take turns in the same order.
 
-*   **Тест:** Игра с ИИ. Проверить, что ИИ корректно принимает решения в соответствии с заданными правилами.
-    *   **Ожидаемый результат:** ИИ всегда берет карту персонажа в союзники, если она из его отдела, иначе пытается продать. ИИ играет карту действия, если она увеличивает его доверие CEO, иначе – пытается продать. ИИ использует Leverage-карту против игрока с самым высоким доверием CEO. ИИ не предлагает откуп.
+#### 7.2. Card Effects
 
-### 8. Критерии начала и окончания тестирования
+*   **Test:** Character card effects.
+    *   **Expected result:** Character card effects are applied to player stats.
+*   **Test:** Action card effects.
+    *   **Expected result:** Action card effects are applied to player stats.
+*   **Test:** Leverage card effects.
+    *   **Expected result:** Leverage card effects are applied to player stats.
+*   **Test:** End card effects.
+    *   **Expected result:** End card effects are applied to player stats.
 
-*   **Критерии начала тестирования:**
-    *   Завершены модульное и интеграционное тестирование.
-    *   Разработаны тестовые сценарии и тестовые данные.
-    *   Подготовлено тестовое окружение.
-*   **Критерии окончания тестирования:**
-    *   Выполнены все запланированные тесты.
-    *   Все выявленные ошибки исправлены и проверены.
-    *   Система соответствует всем требованиям.
+#### 7.3. Player Interaction
 
-### 9. Отчетность
+*   **Test:** Card drawing.
+    *   **Expected result:** Player receives a card from the deck.
+*   **Test:** Card playing.
+    *   **Expected result:** Card is played by the player.
+*   **Test:** Trading.
+    *   **Expected result:** Trading system is used to exchange cards between players.
+*   **Test:** Ally management.
+    *   **Expected result:** Ally cards are added to the player's hand.
 
-*   По результатам каждого этапа тестирования составляется отчет, содержащий:
-    *   Список выполненных тестов.
-    *   Список выявленных ошибок.
-    *   Статус исправления ошибок.
-    *   Оценку соответствия системы требованиям.
+#### 7.4. AI Behavior
+
+*   **Test:** Decision-making logic.
+    *   **Expected result:** AI makes decisions based on player stats and cards.
+*   **Test:** Trading behavior.
+    *   **Expected result:** AI uses Leverage card to buyout other players.
+*   **Test:** Card usage strategy.
+    *   **Expected result:** AI uses Leverage card to buyout other players.
+*   **Test:** Buyout handling.
+    *   **Expected result:** AI sets fixed price for selling cards.
+
+### 8. Test Coverage Requirements
+
+*   Minimum 80% code coverage.
+*   100% coverage for critical game logic.
+*   All edge cases must be tested.
+*   All error conditions must be handled.
+
+### 9. Test Documentation
+
+*   Test case descriptions.
+*   Expected results.
+*   Test data sets.
+*   Test environment setup.
+*   Test execution procedures.
+
+### 10. Test Maintenance
+
+*   Regular review of test cases.
+*   Update tests when requirements change.
+*   Add new tests for new features.
+*   Remove obsolete tests.
+*   Maintain test documentation.

@@ -4,10 +4,10 @@
 EndCard::EndCard(int id) : Card(id, Type::END, "Смерть CEO") {}
 
 bool EndCard::isPossibleToPlay(const Player& player) const {
-    // EndCard всегда можно сыграть
+    // EndCard can always be played
     return true;
 }
 
 void EndCard::execute(Player& player) {
-    // EndCard не имеет эффектов, он просто сигнализирует о конце игры
+    // EndCard does not have any effects, it simply signals the end of the game
 } 

@@ -1,421 +1,420 @@
+## Goal
 
-## Цель
+By the time the "CEO Death" card is drawn, you must have the most of his trust. Your goal is to gain as much trust as possible before this card appears. If two players have the same trust score, the winner is the one with the higher "reputation". If those scores are also equal, the winner is the one with more "money". If those are also equal, the game is declared a draw.
 
-На момент выпадения карточки “Смерть CEO” у вас должно быть больше всего его доверия. Ваша цель получить как можно больше доверия до выпадения этой карточки. Если у двух игроков равный показатель доверия - выигрывает тот, у кого показатель “репутация” выше. Если совпали и эти показатели, то выигрывает тот у кого показатель “деньги” выше. Если совпали и здесь, то объявляется ничья
+## Game Turn
 
-## Ход игры
+At the start of the game, each player receives a character card with three stats: "reputation", "money", and "CEO trust" (always starts at 0). Stats range from 0 to 100. At the start, their sum is between 40 and 50. Then, players take turns drawing cards from the deck and act according to the card type. If a stat drops below 0, it stays at zero, and the player cannot play cards that would further decrease that stat (no negative values allowed).
 
-В начале игры всем игрокам выдаются по карточке персонажа с тремя показателями: “репутация”, “деньги” и “доверие CEO” (всегда выдается с показателем 0 в начале игры). Показатели варьируются от 0 до 100. На момент начала игры их сумма от 40 до 50. Дальше игроки тянут карточки из колоды по одной поочередно и действуют в соответствии с типом карты. Если показатель оказывается меньше 0, то он и остается на нуле, но игрок не может играть карты, которые требуют снятия этого показателя (он не может уйти в минус)
+## What’s in the Deck?
 
-## Что есть в колоде?
+### Characters
 
-### Персонажи
+If a player draws a character card, they can take it as an ally if it is from their department. If a player takes a character as an ally, they receive 10% of that character’s reputation and 10% of their trust. Regardless of the department, the player can sell this card to another player (price is negotiated) or do nothing.
 
-Если игроку выпадает карта персонажа, то он может взять его в союзники, если он из отдела его персонажа. Если человек берет персонажа в союзники, то он получает 10% от его репутации и 10% от его доверия. В независимости от отдела выпавшего персонажа игрок может продать эту карточку другому игроку (о цене игроки договариваются сами) или ничего не делать
+### Action Cards
 
-### Действия
+If a player draws an action card, they can choose to play it (the card’s effects are applied), sell it to another player (price is negotiated), or do nothing. They cannot keep the card.
 
-Если игроку выпадает карта действия, то игрок может выбрать сыграть ее (выполнятся условия карточки) или игрок может продать эту карточку другому игроку (о цене игроки договариваются сами) или ничего не делать. Сохранить он ее не может
+### Leverage Cards
 
-### Leverage-карты
+A special type of action. The player does not show these to others and keeps them in reserve. They deal damage by reducing reputation or CEO trust of other players. The targeted player can be offered a buyout before the card is used against them.
 
-Особый вид действия. Их игрок не показывает другим игрокам и оставляет у себя в запасе. Наносит урон в виде снижения репутации или доверия CEO другим игрокам. Можно попросить откуп у игрока, который хочет применить ее против тебя
+### Card Trading
 
-### Торговля картами
+Trading is only allowed at the moment a card is drawn by a player. Cards already in hand cannot be sold (except for leverage cards). Detailed description of each card is below.
 
-осуществляется исключительно в момент выпадения карты игроку. Карты, которые уже есть на руках не могут быть проданы (за исключением leverage-карт)... Подробное описание каждой карты
+## Characters
 
-## Персонажи
+Departments: Development, Finance, Legal, Sales
 
-Отделы: разработка, финансы, юриспруденция, продажи
+### Team Lead
 
-### Тимлид
+Department: Development  
+Reputation: 30  
+Money: 10
 
-Отдел: разработка
-Репутация: 30
-Деньги: 10
+### Financial Consultant
 
-### Финансовый консультант
+Department: Finance  
+Reputation: 20  
+Money: 20
 
-Отдел: финансы
-Репутация: 20
-Деньги: 20
+### Lawyer
 
-### Юрист
+Department: Legal  
+Reputation: 25  
+Money: 15
 
-Отдел: юриспруденция
-Репутация: 25
-Деньги: 15
+### Sales Manager
 
-### Менеджер по продажам
+Department: Sales  
+Reputation: 28  
+Money: 12
 
-Отдел: продажи
-Репутация: 28
-Деньги: 12
+### Developer
 
-### Разработчик
+Department: Development  
+Reputation: 22  
+Money: 8
 
-Отдел: разработка
-Репутация: 22
-Деньги: 8
+### Financial Analyst
 
-### Финансовый аналитик
+Department: Finance  
+Reputation: 18  
+Money: 22
 
-Отдел: финансы
-Репутация: 18
-Деньги: 22
+### PR Specialist
 
-### Специалист по PR
+Department: Legal  
+Reputation: 20  
+Money: 10
 
-Отдел: юриспруденция
-Репутация: 20
-Деньги: 10
+### Marketer
 
-### Маркетолог
+Department: Sales  
+Reputation: 24  
+Money: 16
 
-Отдел: продажи
-Репутация: 24
-Деньги: 16
+### Tester
 
-### Тестировщик
+Department: Development  
+Reputation: 19  
+Money: 11
 
-Отдел: разработка
-Репутация: 19
-Деньги: 11
+### Accountant
 
-### Бухгалтер
+Department: Finance  
+Reputation: 21  
+Money: 19
 
-Отдел: финансы
-Репутация: 21
-Деньги: 19
+### Legal Counsel
 
-### Юрисконсульт
+Department: Legal  
+Reputation: 26  
+Money: 14
 
-Отдел: юриспруденция
-Репутация: 26
-Деньги: 14
+### Sales Agent
 
-### Продажный агент
+Department: Sales  
+Reputation: 23  
+Money: 17
 
-Отдел: продажи
-Репутация: 23
-Деньги: 17
+### Web Developer
 
-### Веб-разработчик
+Department: Development  
+Reputation: 27  
+Money: 13
 
-Отдел: разработка
-Репутация: 27
-Деньги: 13
+### Chief Financial Officer
 
-### Финансовый директор
+Department: Finance  
+Reputation: 29  
+Money: 21
 
-Отдел: финансы
-Репутация: 29
-Деньги: 21
+### Intellectual Property Specialist
 
-### Специалист по интеллектуальной собственности
+Department: Legal  
+Reputation: 32  
+Money: 18
 
-Отдел: юриспруденция
-Репутация: 32
-Деньги: 18
+### Marketing Manager
 
-### Менеджер по маркетингу
+Department: Sales  
+Reputation: 31  
+Money: 19
 
-Отдел: продажи
-Репутация: 31
-Деньги: 19
+### Software Architect
 
-### Архитектор программного обеспечения
+Department: Development  
+Reputation: 35  
+Money: 15
 
-Отдел: разработка
-Репутация: 35
-Деньги: 15
+### Financial Controller
 
-### Финансовый контроллер
+Department: Finance  
+Reputation: 33  
+Money: 17
 
-Отдел: финансы
-Репутация: 33
-Деньги: 17
+### Litigation Lawyer
 
-### Судебный юрист
+Department: Legal  
+Reputation: 34  
+Money: 16
 
-Отдел: юриспруденция
-Репутация: 34
-Деньги: 16
+### Sales Director
 
-### Директор по продажам
+Department: Sales  
+Reputation: 36  
+Money: 14
 
-Отдел: продажи
-Репутация: 36
-Деньги: 14
+## Action Cards
 
-## Действия
+### Frame a colleague and get a promotion
 
-### Подставить коллегу и получить повышение
+Reputation: -10  
+Money: +10  
+CEO Trust: -2, if reputation after the move is below 30
 
-Репутация: -10
-Деньги: +10
-Доверие CEO: -2, если репутация после хода ниже 30 пунктов
+### Present a big project
 
-### Презентовать большой проект
+Reputation: +4  
+Money: -1  
+CEO Trust: +1, if reputation after the move is above 50; +2, if above 70
 
-Репутация: +4
-Деньги: -1
-Доверие CEO: +1, если репутация после хода выше 50 пунктов; +2, если репутация выше 70 пунктов
+### Sell business information to competitors
 
-### Продать информацию о бизнесе конкурентам
+Reputation: -20  
+Money: +25  
+CEO Trust: -5, if reputation was above 50; -8, if above 80
 
-Репутация: -20
-Деньги: +25
-Доверие CEO: -5, если репутация была выше 50 пунктов; -8, если репутация была выше 80 пунктов
+### Fire an employee
 
-### Уволить сотрудника
+Reputation: -5  
+Money: +5  
+CEO Trust: +1, if the player has an ally with reputation above 40
 
-Репутация: -5
-Деньги: +5
-Доверие CEO: +1, если у игрока есть союзник с репутацией выше 40
+### Organize a corporate event
 
-### Провести корпоративное мероприятие
+Reputation: +3  
+Money: -2  
+CEO Trust: +1, if the player's reputation after the move is above 60
 
-Репутация: +3
-Деньги: -2
-Доверие CEO: +1, если репутация игрока после хода выше 60 пунктов
+### Get a loan
 
-### Получить кредит
+Reputation: 0  
+Money: +20  
+CEO Trust: -2, if the player already has a loan
 
-Репутация: 0
-Деньги: +20
-Доверие CEO: -2, если у игрока уже есть кредит
+### Create a new department
 
-### Создать новый отдел
+Reputation: +2  
+Money: -10  
+CEO Trust: +3, if the player has an ally with reputation above 50
 
-Репутация: +2
-Деньги: -10
-Доверие CEO: +3, если у игрока есть союзник с репутацией выше 50
+### Hire a new employee
 
-### Нанять нового сотрудника
+Reputation: +1  
+Money: -5  
+CEO Trust: +1, if the player has an ally from the same department
 
-Репутация: +1
-Деньги: -5
-Доверие CEO: +1, если у игрока есть союзник из того же отдела
+### Conduct an audit
 
-### Провести аудит
+Reputation: +5  
+Money: -3  
+CEO Trust: +2, if the player has an ally with reputation above 60
 
-Репутация: +5
-Деньги: -3
-Доверие CEO: +2, если у игрока есть союзник с репутацией выше 60
+### Create a new product
 
-### Создать новый продукт
+Reputation: +6  
+Money: -8  
+CEO Trust: +4, if the player has an ally with reputation above 70
 
-Репутация: +6
-Деньги: -8
-Доверие CEO: +4, если у игрока есть союзник с репутацией выше 70
+### Negotiate with a client
 
-### Провести переговоры с клиентом
+Reputation: +4  
+Money: +2  
+CEO Trust: +2, if the player has an ally with reputation above 40
 
-Репутация: +4
-Деньги: +2
-Доверие CEO: +2, если у игрока есть союзник с репутацией выше 40
+### Run an advertising campaign
 
-### Провести рекламную кампанию
+Reputation: +5  
+Money: -6  
+CEO Trust: +1, if the player has an ally with reputation above 50
 
-Репутация: +5
-Деньги: -6
-Доверие CEO: +1, если у игрока есть союзник с репутацией выше 50
+### Create a strategic plan
 
-### Создать стратегический план
+Reputation: +3  
+Money: -4  
+CEO Trust: +3, if the player has an ally with reputation above 60
 
-Репутация: +3
-Деньги: -4
-Доверие CEO: +3, если у игрока есть союзник с репутацией выше 60
+### Conduct staff training
 
-### Провести тренинг для сотрудников
+Reputation: +2  
+Money: -3  
+CEO Trust: +1, if the player has an ally with reputation above 40
 
-Репутация: +2
-Деньги: -3
-Доверие CEO: +1, если у игрока есть союзник с репутацией выше 40
+### Conduct market analysis
 
-### Провести анализ рынка
+Reputation: +1  
+Money: -2  
+CEO Trust: +2, if the player has an ally with reputation above 50
 
-Репутация: +1
-Деньги: -2
-Доверие CEO: +2, если у игрока есть союзник с репутацией выше 50
+### Create a new direction
 
-### Создать новое направление
+Reputation: +4  
+Money: -7  
+CEO Trust: +5, if the player has an ally with reputation above 70
 
-Репутация: +4
-Деньги: -7
-Доверие CEO: +5, если у игрока есть союзник с репутацией выше 70
+### Meet with investors
 
-### Провести встречу с инвесторами
+Reputation: +6  
+Money: +5  
+CEO Trust: +4, if the player has an ally with reputation above 60
 
-Репутация: +6
-Деньги: +5
-Доверие CEO: +4, если у игрока есть союзник с репутацией выше 60
+### Conduct IT audit
 
-### Провести IT-аудит
+Reputation: +5  
+Money: -4  
+CEO Trust: +3, if the player has an ally with reputation above 50
 
-Репутация: +5
-Деньги: -4
-Доверие CEO: +3, если у игрока есть союзник с репутацией выше 50
+### Create a new team
 
-### Создать новую команду
+Reputation: +3  
+Money: -6  
+CEO Trust: +2, if the player has an ally with reputation above 40
 
-Репутация: +3
-Деньги: -6
-Доверие CEO: +2, если у игрока есть союзник с репутацией выше 40
+### Run a PR campaign
 
-### Провести PR-кампанию
+Reputation: +7  
+Money: -9  
+CEO Trust: +5, if the player has an ally with reputation above 70
 
-Репутация: +7
-Деньги: -9
-Доверие CEO: +5, если у игрока есть союзник с репутацией выше 70
+### Conduct financial analysis
 
-### Провести анализ финансов
+Reputation: +2  
+Money: -1  
+CEO Trust: +1, if the player has an ally with reputation above 40
 
-Репутация: +2
-Деньги: -1
-Доверие CEO: +1, если у игрока есть союзник с репутацией выше 40
+### Create a new brand
 
-### Создать новый бренд
+Reputation: +5  
+Money: -8  
+CEO Trust: +4, if the player has an ally with reputation above 60
 
-Репутация: +5
-Деньги: -8
-Доверие CEO: +4, если у игрока есть союзник с репутацией выше 60
+### Meet with partners
 
-### Провести встречу с партнерами
+Reputation: +4  
+Money: +3  
+CEO Trust: +3, if the player has an ally with reputation above 50
 
-Репутация: +4
-Деньги: +3
-Доверие CEO: +3, если у игрока есть союзник с репутацией выше 50
+### Analyze competitors
 
-### Провести анализ конкурентов
+Reputation: +3  
+Money: -2  
+CEO Trust: +2, if the player has an ally with reputation above 40
 
-Репутация: +3
-Деньги: -2
-Доверие CEO: +2, если у игрока есть союзник с репутацией выше 40
+### Create a new offer
 
-### Создать новое предложение
+Reputation: +6  
+Money: -10  
+CEO Trust: +5, if the player has an ally with reputation above 70
 
-Репутация: +6
-Деньги: -10
-Доверие CEO: +5, если у игрока есть союзник с репутацией выше 70
+### Conduct leadership training
 
-### Провести тренинг для лидеров
+Reputation: +5  
+Money: -6  
+CEO Trust: +3, if the player has an ally with reputation above 60
 
-Репутация: +5
-Деньги: -6
-Доверие CEO: +3, если у игрока есть союзник с репутацией выше 60
+### Analyze clients
 
-### Провести анализ клиентов
+Reputation: +4  
+Money: -3  
+CEO Trust: +2, if the player has an ally with reputation above 50
 
-Репутация: +4
-Деньги: -3
-Доверие CEO: +2, если у игрока есть союзник с репутацией выше 50
+### Create a new strategy
 
-### Создать новую стратегию
+Reputation: +7  
+Money: -11  
+CEO Trust: +6, if the player has an ally with reputation above 70
 
-Репутация: +7
-Деньги: -11
-Доверие CEO: +6, если у игрока есть союзник с репутацией выше 70
+### Meet with clients
 
-### Провести встречу с клиентами
+Reputation: +6  
+Money: +4  
+CEO Trust: +4, if the player has an ally with reputation above 60
 
-Репутация: +6
-Деньги: +4
-Доверие CEO: +4, если у игрока есть союзник с репутацией выше 60
+### Analyze market trends
 
-### Провести анализ рыночных тенденций
+Reputation: +5  
+Money: -5  
+CEO Trust: +3, if the player has an ally with reputation above 50
 
-Репутация: +5
-Деньги: -5
-Доверие CEO: +3, если у игрока есть союзник с репутацией выше 50
+## Leverage Cards
 
-## Leverage карты
+### Reveal the migration status of a cousin
 
-### Раскрыть статус миграции двоюродной сестры
+Reputation: -10  
+Money: -5  
+CEO Trust: if it was below 50, -4
 
-Репутация: -10
-Деньги: -5
-Доверие CEO: если было ниже 50 пунктов, -4
+### Tell about a tweet from the last decade
 
-### Рассказать о твите из прошлого десятелетия
+Reputation: -5  
+CEO Trust: if it was below 20, -1
 
-Репутация: -5
-Доверие CEO: если было ниже 20 пунктов, -1
+### Call the tax inspectorate
 
-### Вызвать налоговую инспекцию
+Reputation: -8  
+Money: -10  
+CEO Trust: -2
 
-Репутация: -8
-Деньги: -10
-Доверие CEO: -2
+### Reveal secret information
 
-### Раскрыть секретную информацию
+Reputation: -12  
+CEO Trust: -3
 
-Репутация: -12
-Доверие CEO: -3
+### Accuse of plagiarism
 
-### Обвинить в плагиате
+Reputation: -9  
+Money: -6  
+CEO Trust: -1
 
-Репутация: -9
-Деньги: -6
-Доверие CEO: -1
+### Reveal personal data
 
-### Раскрыть личные данные
+Reputation: -11  
+Money: -8  
+CEO Trust: -2
 
-Репутация: -11
-Деньги: -8
-Доверие CEO: -2
+### Call for a security check
 
-### Вызвать проверку безопасности
+Reputation: -7  
+Money: -5  
+CEO Trust: -1
 
-Репутация: -7
-Деньги: -5
-Доверие CEO: -1
+### Reveal financial violations
 
-### Раскрыть финансовые нарушения
+Reputation: -10  
+Money: -12  
+CEO Trust: -3
 
-Репутация: -10
-Деньги: -12
-Доверие CEO: -3
+### Accuse of negligence
 
-### Обвинить в халатности
+Reputation: -8  
+Money: -7  
+CEO Trust: -2
 
-Репутация: -8
-Деньги: -7
-Доверие CEO: -2
+### Reveal conflict of interest
 
-### Раскрыть конфликт интересов
+Reputation: -9  
+Money: -9  
+CEO Trust: -2
 
-Репутация: -9
-Деньги: -9
-Доверие CEO: -2
+### Call for an audit
 
-### Вызвать аудиторскую проверку
+Reputation: -6  
+Money: -4  
+CEO Trust: -1
 
-Репутация: -6
-Деньги: -4
-Доверие CEO: -1
+### Reveal information about competitors
 
-### Раскрыть информацию о конкурентах
+Reputation: -5  
+Money: -3  
+CEO Trust: -1
 
-Репутация: -5
-Деньги: -3
-Доверие CEO: -1
+### Accuse of unethical behavior
 
-### Обвинить в неэтичном поведении
+Reputation: -12  
+CEO Trust: -2
 
-Репутация: -12
-Доверие CEO: -2
+### Reveal information about employees
 
-### Раскрыть информацию о сотрудниках
+Reputation: -11  
+Money: -10  
+CEO Trust: -2
 
-Репутация: -11
-Деньги: -10
-Доверие CEO: -2
+### Call for compliance check
 
-### Вызвать проверку соблюдения законов
-
-Репутация: -7
-Деньги: -6
-Доверие CEO: -1
+Reputation: -7  
+Money: -6  
+CEO Trust: -1

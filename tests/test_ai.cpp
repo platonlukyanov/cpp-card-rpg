@@ -10,10 +10,10 @@ protected:
         stack = std::make_unique<Stack>();
         ai = std::make_unique<AI>("ai_id", "ai_secret");
         
-        // Добавляем карты в стек
-        stack->pushCard(factory->createCard("Подставить коллегу и получить повышение", 2));
-        stack->pushCard(factory->createCard("Раскрыть статус миграции двоюродной сестры", 3));
-        stack->pushCard(factory->createCard("Финансовый консультант", 1));
+        // Adding cards to the stack
+        stack->pushCard(factory->createCard("Frame a colleague and get a promotion", 2));
+        stack->pushCard(factory->createCard("Reveal the migration status of a cousin", 3));
+        stack->pushCard(factory->createCard("Financial Consultant", 1));
     }
 
     std::unique_ptr<CardFactory> factory;
@@ -30,7 +30,7 @@ TEST_F(AITest, GetSecretReturnsCorrectValue) {
 }
 
 TEST_F(AITest, MakeMoveReturnsValidMove) {
-    ai->setDepartment("финансы");
+    ai->setDepartment("finance");
     auto move = ai->makeMove(*stack);
     ASSERT_NE(move, nullptr);
     EXPECT_TRUE(move->isAbleToAccept());
@@ -43,17 +43,17 @@ TEST_F(AITest, MakeMoveReturnsNullptrWhenNoCards) {
 }
 
 TEST_F(AITest, MakeMoveReturnsNullptrWhenInvalidDepartment) {
-    ai->setDepartment("разработка");
+    ai->setDepartment("development");
     auto move = ai->makeMove(*stack);
     EXPECT_EQ(move, nullptr);
 }
 
 TEST_F(AITest, MakeMoveUpdatesPlayerStats) {
-    ai->setDepartment("финансы");
+    ai->setDepartment("finance");
     auto move = ai->makeMove(*stack);
     ASSERT_NE(move, nullptr);
     move->accept();
     
     EXPECT_EQ(ai->getReputation(), 2);
-    EXPECT_EQ(ai->getTrust(), 11); // 10 (базовое) + 10 (от карты персонажа)
+    EXPECT_EQ(ai->getTrust(), 11); // 10 (base) + 10 (from character card)
 } 

@@ -44,7 +44,7 @@ TEST_F(GameTest, OfferMoveReturnsValidMove) {
 
 TEST_F(GameTest, NextAdvancesGameState) {
     game.next();
-    // Проверяем, что игра не закончилась (до 75% игры не должна, а это первый тест)
+    // Check that the game is not over yet (75% of the game should not be over)
     EXPECT_FALSE(game.isEnd());
 }
 

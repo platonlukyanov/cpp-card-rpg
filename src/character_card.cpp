@@ -8,14 +8,14 @@ CharacterCard::CharacterCard(int id, const std::string& name,
       department_(department) {}
 
 bool CharacterCard::isPossibleToPlay(const Player& player) const {
-    // Персонажа можно взять в союзники, если он из того же отдела
+    // Character can be taken in allies if it is from the same department
     return player.getDepartment() == department_;
 }
 
 void CharacterCard::execute(Player& player) {
-    // При взятии персонажа в союзники, игрок получает 10% от его репутации и доверия
+    // When taking a character card to an ally, the player gains 10% of the character's reputation and trust
     player.gainReputation(reputation_ / 10);
-    player.gainTrust(1); // Базовое доверие за союзника (10% oт стандартных 10)
+    player.gainTrust(1); // Base trust for an ally (10% of the character's reputation is 1)
     player.addAlly(*this);
 }
 

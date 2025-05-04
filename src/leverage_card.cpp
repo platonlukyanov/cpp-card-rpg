@@ -11,7 +11,7 @@ LeverageCard::LeverageCard(int id, const std::string& name,
       trustDamage_(trustDamage) {}
 
 bool LeverageCard::isPossibleToPlay(const Player& player) const {
-    // По умолчанию карту рычага можно сыграть
+    // By default the card can be played
     return true;
 }
 

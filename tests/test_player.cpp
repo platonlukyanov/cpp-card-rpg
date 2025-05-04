@@ -6,7 +6,7 @@ class PlayerTest : public ::testing::Test {
 protected:
     void SetUp() override {
         player = std::make_unique<Player>("test_id", "test_secret");
-        character = std::make_unique<CharacterCard>(1, "Тестовый персонаж", 30, 20, "разработка");
+        character = std::make_unique<CharacterCard>(1, "Test character", 30, 20, "development");
     }
 
     std::unique_ptr<Player> player;
@@ -34,36 +34,36 @@ TEST_F(PlayerTest, GetTrustReturnsTenInitially) {
 }
 
 TEST_F(PlayerTest, SetAndGetDepartment) {
-    player->setDepartment("разработка");
-    EXPECT_EQ(player->getDepartment(), "разработка");
+    player->setDepartment("development");
+    EXPECT_EQ(player->getDepartment(), "development");
 }
 
 TEST_F(PlayerTest, AddAllyIncreasesAlliesCount) {
-    player->setDepartment("разработка");
+    player->setDepartment("development");
     player->addAlly(*character);
     EXPECT_EQ(player->getAllies().size(), 1);
 }
 
 TEST_F(PlayerTest, HasAllyFromDepartmentReturnsTrueForMatchingDepartment) {
-    player->setDepartment("разработка");
+    player->setDepartment("development");
     player->addAlly(*character);
-    EXPECT_TRUE(player->hasAllyFromDepartment("разработка"));
+    EXPECT_TRUE(player->hasAllyFromDepartment("development"));
 }
 
 TEST_F(PlayerTest, HasAllyFromDepartmentReturnsFalseForDifferentDepartment) {
-    player->setDepartment("разработка");
+    player->setDepartment("development");
     player->addAlly(*character);
-    EXPECT_FALSE(player->hasAllyFromDepartment("финансы"));
+    EXPECT_FALSE(player->hasAllyFromDepartment("finance"));
 }
 
 TEST_F(PlayerTest, HasAllyWithReputationAboveReturnsTrueForMatchingAlly) {
-    player->setDepartment("разработка");
+    player->setDepartment("development");
     player->addAlly(*character);
     EXPECT_TRUE(player->hasAllyWithReputationAbove(25));
 }
 
 TEST_F(PlayerTest, HasAllyWithReputationAboveReturnsFalseForNoMatchingAlly) {
-    player->setDepartment("разработка");
+    player->setDepartment("development");
     player->addAlly(*character);
     EXPECT_FALSE(player->hasAllyWithReputationAbove(35));
 } 
