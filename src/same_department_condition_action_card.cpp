@@ -1,3 +1,6 @@
+/* Platon Lukyanov st128133@student.spbu.ru
+ * Lab Work 2
+ */
 #include "same_department_condition_action_card.h"
 
 SameDepartmentConditionActionCard::SameDepartmentConditionActionCard(

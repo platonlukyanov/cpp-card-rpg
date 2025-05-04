@@ -1,3 +1,6 @@
+/* Platon Lukyanov st128133@student.spbu.ru
+ * Lab Work 2
+ */
 #include "player.h"
 #include "cli_game_utils.h"
 #include "card_cli_utils.h"

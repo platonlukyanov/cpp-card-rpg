@@ -1,3 +1,6 @@
+/* Platon Lukyanov st128133@student.spbu.ru
+ * Lab Work 2
+ */
 #include "card.h"
 #include "action_card.h"
 #include "character_card.h"

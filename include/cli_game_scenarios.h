@@ -1,3 +1,6 @@
+/* Platon Lukyanov st128133@student.spbu.ru
+ * Lab Work 2
+ */
 #ifndef CLI_GAME_SCENARIOS_H
 #define CLI_GAME_SCENARIOS_H
 #include <vector>

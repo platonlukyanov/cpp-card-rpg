@@ -1,3 +1,6 @@
+/* Platon Lukyanov st128133@student.spbu.ru
+ * Lab Work 2
+ */
 #include "leverage_card.h"
 #include "player.h"
 #include <memory>

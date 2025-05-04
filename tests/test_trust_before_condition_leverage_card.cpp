@@ -1,3 +1,6 @@
+/* Platon Lukyanov st128133@student.spbu.ru
+ * Lab Work 2
+ */
 #include <gtest/gtest.h>
 #include "trust_before_condition_leverage_card.h"
 #include "player.h"

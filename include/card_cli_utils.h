@@ -1,3 +1,6 @@
+/* Platon Lukyanov st128133@student.spbu.ru
+ * Lab Work 2
+ */
 #ifndef CARD_CLI_UTILS_H
 #define CARD_CLI_UTILS_H
 #include "card.h"

@@ -1,3 +1,6 @@
+/* Platon Lukyanov st128133@student.spbu.ru
+ * Lab Work 2
+ */
 #include "card.h"
 
 Card::Card(int id, Type type, const std::string& name)

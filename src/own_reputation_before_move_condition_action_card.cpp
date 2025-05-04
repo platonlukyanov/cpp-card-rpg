@@ -1,3 +1,6 @@
+/* Platon Lukyanov st128133@student.spbu.ru
+ * Lab Work 2
+ */
 #include "own_reputation_before_move_condition_action_card.h"
 
 OwnReputationBeforeMoveConditionActionCard::OwnReputationBeforeMoveConditionActionCard(

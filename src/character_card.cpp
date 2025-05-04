@@ -1,3 +1,6 @@
+/* Platon Lukyanov st128133@student.spbu.ru
+ * Lab Work 2
+ */
 #include "character_card.h"
 
 CharacterCard::CharacterCard(int id, const std::string& name, 
