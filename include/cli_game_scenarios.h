@@ -7,8 +7,11 @@
 #include "player.h"
 
 bool promptForTrade(Move& move, const std::vector<std::shared_ptr<Player>>& players);
-void promptForLeverage(Move& move, Game& game);
+void promptForLeverage(Move& move, std::vector<std::shared_ptr<Player>>& players);
 void gameEnd(std::shared_ptr<Move> move, Game& game);
-void humanPlayerMove(std::shared_ptr<Move>, Game& game);
+void humanPlayerMove(std::shared_ptr<Move>, std::vector<std::shared_ptr<Player>>& players);
+void greetPlayers();
+std::vector<UserPlayerInput> promptForPlayers();
+void aiPlayerMove(std::unique_ptr<Move> move, std::vector<std::shared_ptr<Player>>& players);
 
 #endif

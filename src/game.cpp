@@ -69,7 +69,7 @@ void Game::initialize(const std::vector<UserPlayerInput>& players) {
         std::shared_ptr<Player> player;
         std::string id = std::to_string(i);
         if (playerInput.isAI) {
-            player = std::make_shared<AI>(id, playerInput.playerSecret);
+            player = std::make_shared<AI>("AI", playerInput.playerSecret);
         } else {
             player = std::make_shared<Player>(id, playerInput.playerSecret);
             player->setName(playerInput.playerName);
