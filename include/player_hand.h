@@ -44,10 +44,10 @@ class PlayerHand {
         std::shared_ptr<Card> playCard(int index);
         /**
          * @brief Returns all leverage cards in the hand
-         * @return const std::vector<std::shared_ptr<Card>> Vector of leverage
+         * @return const std::vector<std::shared_ptr<LeverageCard>> Vector of leverage
          * cards
          */
-        const std::vector<std::shared_ptr<Card>> getLeverageCards() const;
+        const std::vector<std::shared_ptr<LeverageCard>> getLeverageCards() const;
 
     private:
         std::vector<std::shared_ptr<Card>> cards_;  ///< All cards in hand

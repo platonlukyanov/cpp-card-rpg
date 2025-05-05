@@ -45,7 +45,7 @@ class Move {
          *
          * @return Card* Pointer to the card
          */
-        Card* getCard() const;
+        std::shared_ptr<Card> getCard() const;
 
         /**
          * @brief Checks if the move can be accepted
@@ -75,6 +75,6 @@ class Move {
 
     private:
         Player& actor_;               ///< Player making the move
-        std::unique_ptr<Card> card_;  ///< Card involved in the move
+        std::shared_ptr<Card> card_;  ///< Card involved in the move
         bool hasPlayed_;
 };

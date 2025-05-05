@@ -46,6 +46,6 @@ void Move::decline() {
     hasPlayed_ = true;
 }
 
-Card* Move::getCard() const {
-    return card_.get();
+std::shared_ptr<Card> Move::getCard() const {
+    return card_;
 }

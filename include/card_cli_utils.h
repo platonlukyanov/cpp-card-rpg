@@ -4,8 +4,9 @@
 #ifndef CARD_CLI_UTILS_H
 #define CARD_CLI_UTILS_H
 #include "card.h"
+#include <memory>
 
-void displayCard(Card* card);
+void displayCard(std::shared_ptr<Card> card);
 void displayCardShort(std::shared_ptr<Card> card);
 
 #endif
