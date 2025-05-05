@@ -9,10 +9,8 @@
 #include "card_factory.h"
 #include "player_hand.h"
 
-const int GAME_LENGTH = 37;
-
 Game::Game() : stack_(std::make_unique<Stack>()) {
-    std::array<std::string, GAME_LENGTH - 1> cards = {
+    std::vector<std::string> cards = {
         "Team Lead",
         "Financial Consultant",
         "Lawyer",
@@ -50,6 +48,7 @@ Game::Game() : stack_(std::make_unique<Stack>()) {
         "Reveal secret information",
         "Accuse of plagiarism",
     };
+    int GAME_LENGTH = cards.size();
 
     for (int i = 0; static_cast<size_t>(i) < cards.size(); ++i) {
         auto card = CardFactory::createCard(cards[i], i + 1);
