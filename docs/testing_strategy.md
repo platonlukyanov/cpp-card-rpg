@@ -131,22 +131,7 @@
 *   **Test:** Buyout handling.
     *   **Expected result:** AI sets fixed price for selling cards.
 
-## 8. Test Coverage Requirements
-
-*   Minimum 80% code coverage.
-*   100% coverage for critical game logic.
-*   All edge cases must be tested.
-*   All error conditions must be handled.
-
-## 9. Test Documentation
-
-*   Test case descriptions.
-*   Expected results.
-*   Test data sets.
-*   Test environment setup.
-*   Test execution procedures.
-
-## 10. Test Maintenance
+## 8. Test Maintenance
 
 *   Regular review of test cases.
 *   Update tests when requirements change.
