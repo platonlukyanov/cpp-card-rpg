@@ -116,4 +116,4 @@ class LeverageCard : public Card {
         virtual void executePreeffects(Player& player);
 };
 
-#endif // INCLUDE_LEVERAGE_CARD_H
+#endif  // INCLUDE_LEVERAGE_CARD_H

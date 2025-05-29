@@ -31,12 +31,12 @@ void displayCardShort(std::shared_ptr<Card> card) {
 }
 
 void displayCard(std::shared_ptr<Card> card) {
-
     std::cout << card->getName();
 
     switch (card->getType()) {
         case Card::Type::ACTION: {
-            std::shared_ptr<ActionCard> actionCard = std::dynamic_pointer_cast<ActionCard>(card);
+            std::shared_ptr<ActionCard> actionCard =
+                std::dynamic_pointer_cast<ActionCard>(card);
             std::cout << " (Action)" << std::endl;
             printStat("Money", actionCard->getMoneyChange(), Color::GREEN);
             printStat("Reputation", actionCard->getReputationChange(),
@@ -45,7 +45,8 @@ void displayCard(std::shared_ptr<Card> card) {
             break;
         }
         case Card::Type::CHARACTER: {
-            std::shared_ptr<CharacterCard> characterCard = std::dynamic_pointer_cast<CharacterCard>(card);
+            std::shared_ptr<CharacterCard> characterCard =
+                std::dynamic_pointer_cast<CharacterCard>(card);
             std::cout << " (Character)" << std::endl;
             std::cout << " Department: " << characterCard->getDepartment()
                       << std::endl;
@@ -54,7 +55,8 @@ void displayCard(std::shared_ptr<Card> card) {
             break;
         }
         case Card::Type::LEVERAGE: {
-            std::shared_ptr<LeverageCard> leverageCard = std::dynamic_pointer_cast<LeverageCard>(card);
+            std::shared_ptr<LeverageCard> leverageCard =
+                std::dynamic_pointer_cast<LeverageCard>(card);
             std::cout << " (Leverage)" << std::endl;
             std::cout << "Damage:" << std::endl;
             printStat("Money", leverageCard->getMoneyDamage(), Color::GREEN);

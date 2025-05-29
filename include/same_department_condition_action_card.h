@@ -59,4 +59,4 @@ class SameDepartmentConditionActionCard : public ActionCard {
     private:
         std::string department_;  ///< Department required to play this card
 };
-#endif // INCLUDE_SAME_DEPARTMENT_CONDITION_ACTION_CARD_H
+#endif  // INCLUDE_SAME_DEPARTMENT_CONDITION_ACTION_CARD_H

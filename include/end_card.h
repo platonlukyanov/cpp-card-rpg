@@ -43,4 +43,4 @@ class EndCard : public Card {
         void execute(Player& player) override;
 };
 
-#endif // INCLUDE_END_CARD_H
+#endif  // INCLUDE_END_CARD_H

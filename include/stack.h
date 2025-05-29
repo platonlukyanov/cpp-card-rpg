@@ -101,4 +101,4 @@ class Stack {
         std::vector<Card*> cards_;  ///< Collection of cards in the stack
 };
 
-#endif // INCLUDE_STACK_H
+#endif  // INCLUDE_STACK_H

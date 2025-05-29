@@ -89,4 +89,4 @@ class Card {
         std::string name_;  ///< Display name shown to players
 };
 
-#endif // INCLUDE_CARD_H
+#endif  // INCLUDE_CARD_H

@@ -29,12 +29,14 @@ std::shared_ptr<Card> PlayerHand::playCard(int index) {
     return card;
 }
 
-const std::vector<std::shared_ptr<LeverageCard>> PlayerHand::getLeverageCards() const {
+const std::vector<std::shared_ptr<LeverageCard>> PlayerHand::getLeverageCards()
+    const {
     static std::vector<std::shared_ptr<LeverageCard>> leverageCards;
     leverageCards.clear();
     for (auto card : cards_) {
         if (card->getType() == Card::Type::LEVERAGE) {
-            std::shared_ptr<LeverageCard> leverageCard = std::dynamic_pointer_cast<LeverageCard>(card);
+            std::shared_ptr<LeverageCard> leverageCard =
+                std::dynamic_pointer_cast<LeverageCard>(card);
             leverageCards.push_back(leverageCard);
         }
     }

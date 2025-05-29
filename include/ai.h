@@ -44,4 +44,4 @@ class AI : public Player {
             "AI";  ///< Display name for AI players
 };
 
-#endif // INCLUDE_AI_H
+#endif  // INCLUDE_AI_H

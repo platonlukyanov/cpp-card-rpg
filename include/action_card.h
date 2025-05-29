@@ -77,4 +77,4 @@ class ActionCard : public Card {
         int trustChange_;       ///< Player's trust change
 };
 
-#endif // INCLUDE_ACTION_CARD_H
+#endif  // INCLUDE_ACTION_CARD_H

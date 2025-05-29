@@ -59,4 +59,4 @@ class TrustBeforeConditionLeverageCard : public LeverageCard {
     private:
         int minTrust_;  ///< Minimum required trust level to use the card
 };
-#endif // INCLUDE_TRUST_BEFORE_CONDITION_LEVERAGE_CARD_H
+#endif  // INCLUDE_TRUST_BEFORE_CONDITION_LEVERAGE_CARD_H

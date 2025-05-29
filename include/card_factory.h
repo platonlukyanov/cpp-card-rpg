@@ -77,4 +77,4 @@ class CardFactory {
         static std::unique_ptr<EndCard> createEndCard(int id);
 };
 
-#endif // INCLUDE_CARD_FACTORY_H
+#endif  // INCLUDE_CARD_FACTORY_H

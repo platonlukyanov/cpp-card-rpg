@@ -249,12 +249,14 @@ void aiOffersTrade(std::unique_ptr<Move> move,
     int price = 5;
 
     if (move->getCard()->getType() == Card::Type::CHARACTER) {
-        std::shared_ptr<CharacterCard> characterCard = std::dynamic_pointer_cast<CharacterCard>(move->getCard());
+        std::shared_ptr<CharacterCard> characterCard =
+            std::dynamic_pointer_cast<CharacterCard>(move->getCard());
         price = characterCard->getMoney() / 10 * 2;
     }
 
     if (move->getCard()->getType() == Card::Type::ACTION) {
-        std::shared_ptr<ActionCard> actionCard = std::dynamic_pointer_cast<ActionCard>(move->getCard());
+        std::shared_ptr<ActionCard> actionCard =
+            std::dynamic_pointer_cast<ActionCard>(move->getCard());
         price = actionCard->getMoneyChange() > 0
                     ? actionCard->getMoneyChange() * 2
                     : 5;
@@ -325,13 +327,14 @@ void aiPlayerMove(std::unique_ptr<Move> move,
         std::cout << "AI targets " << maxTrustPlayer->getPlayerName()
                   << std::endl;
 
-        std::shared_ptr<LeverageCard> leverageCard = actor.getHand()->getLeverageCards()[0];     
+        std::shared_ptr<LeverageCard> leverageCard =
+            actor.getHand()->getLeverageCards()[0];
         if (!(maxTrustPlayer)) {
             std::cout << "Can't target player" << std::endl;
             return;
         }
         std::cout << leverageCard->getTrustDamage() << std::endl;
-        
+
         leverageCard->executeOnPlayer(*maxTrustPlayer);
         leverageCard->deactivate(actor);
         return;
@@ -348,7 +351,8 @@ void aiPlayerMove(std::unique_ptr<Move> move,
     }
 
     if (card->getType() == Card::Type::ACTION) {
-        std::shared_ptr<ActionCard> actionCard = std::dynamic_pointer_cast<ActionCard>(card);
+        std::shared_ptr<ActionCard> actionCard =
+            std::dynamic_pointer_cast<ActionCard>(card);
 
         if (actionCard->getTrustChange() < 0) {
             aiOffersTrade(std::move(move), players);

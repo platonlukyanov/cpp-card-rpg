@@ -62,4 +62,4 @@ class OwnReputationAfterMoveConditionActionCard : public ActionCard {
         int minReputation_;  ///< Minimum required reputation level to play the
                              ///< card
 };
-#endif // INCLUDE_OWN_REPUTATION_AFTER_MOVE_CONDITION_ACTION_CARD_H
+#endif  // INCLUDE_OWN_REPUTATION_AFTER_MOVE_CONDITION_ACTION_CARD_H

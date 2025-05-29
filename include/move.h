@@ -80,4 +80,4 @@ class Move {
         bool hasPlayed_;
 };
 
-#endif // INCLUDE_MOVE_H
+#endif  // INCLUDE_MOVE_H

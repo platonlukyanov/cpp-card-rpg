@@ -56,4 +56,4 @@ class AllyReputationConditionActionCard : public ActionCard {
     private:
         int minAllyReputation_;
 };
-#endif // INCLUDE_ALLY_REPUTATION_CONDITION_ACTION_CARD_H
+#endif  // INCLUDE_ALLY_REPUTATION_CONDITION_ACTION_CARD_H

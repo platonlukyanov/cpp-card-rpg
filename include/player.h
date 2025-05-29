@@ -193,4 +193,4 @@ class Player {
         std::vector<Ally> allies_;          ///< Player's allies
 };
 
-#endif // INCLUDE_PLAYER_H
+#endif  // INCLUDE_PLAYER_H

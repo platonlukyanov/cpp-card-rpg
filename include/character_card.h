@@ -83,4 +83,4 @@ class CharacterCard : public Card {
         std::string department_;  ///< Character's department name
 };
 
-#endif // INCLUDE_CHARACTER_CARD_H
+#endif  // INCLUDE_CHARACTER_CARD_H

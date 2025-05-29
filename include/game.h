@@ -98,4 +98,4 @@ class Game {
             playersQueue_;  ///< Current turn order
 };
 
-#endif // INCLUDE_GAME_H
+#endif  // INCLUDE_GAME_H

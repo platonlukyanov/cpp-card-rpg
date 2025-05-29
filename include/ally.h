@@ -54,4 +54,4 @@ class Ally {
         std::string department_;
 };
 
-#endif // INCLUDE_ALLY_H
+#endif  // INCLUDE_ALLY_H
