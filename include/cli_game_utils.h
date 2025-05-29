@@ -1,0 +1,19 @@
+/* Platon Lukyanov st128133@student.spbu.ru
+ * Lab Work 2
+ */
+#ifndef CLI_GAME_UTILS_H
+#define CLI_GAME_UTILS_H
+
+#include <iostream>
+#include <map>
+#include <string>
+#include <vector>
+
+enum class Color { GREEN, RED, BLUE, DEFAULT };
+
+void printColored(const std::string& text, Color color);
+void printStat(const std::string& label, int value, Color color);
+void clearInput();
+int cliSelect(const std::vector<std::string>& options);
+
+#endif

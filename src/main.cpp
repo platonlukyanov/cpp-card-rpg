@@ -1,15 +1,54 @@
+/* Platon Lukyanov st128133@student.spbu.ru
+ * Lab Work 2
+ */
 #include <iostream>
+#include <limits>
+#include <map>
+#include <memory>
+#include <string>
+#include <vector>
 
-#include "Point.h"
-#include "Square.h"
+#include "action_card.h"
+#include "card_cli_utils.h"
+#include "character_card.h"
+#include "cli_game_scenarios.h"
+#include "cli_game_utils.h"
+#include "game.h"
+#include "leverage_card.h"
+#include "player_cli_utils.h"
+#include "player_hand.h"
 
 int main() {
-    Point p1(0.0, 0.0);
-    Point p2(5.0, 5.0);
-    Square square(p1, 5.0);
+    Game game;
 
-    std::cout << "Area of square: " << square.area() << std::endl;
-    std::cout << "Perimeter of square: " << square.perimeter() << std::endl;
+    greetPlayers();
+    std::vector<UserPlayerInput> playersInput = promptForPlayers();
+
+    game.initialize(playersInput);
+    std::vector<std::shared_ptr<Player>> players = game.getPlayers();
+
+    while (!game.isEnd()) {
+        auto move = game.offerMove();
+
+        if (game.isEnd()) {
+            gameEnd(std::move(move), game);
+            break;
+        }
+
+        Player& actor = move->getActor();
+        std::cout << "Current player: " << actor.getPlayerName() << std::endl;
+
+        showCurrentPlayerStats(&actor);
+        showCurrentPlayerCards(actor);
+
+        if (actor.getId() == "AI") {
+            aiPlayerMove(std::move(move), players);
+        } else {
+            humanPlayerMove(std::move(move), players);
+        }
+
+        game.next();
+    }
 
     return 0;
 }

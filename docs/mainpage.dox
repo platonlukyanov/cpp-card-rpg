@@ -1,0 +1,49 @@
+/**
+ * @mainpage Corporate Throne - Card Game
+ *
+ * @section intro_sec Introduction
+ * "Corporate Throne" is a console-based card game developed in C++. In this game, players compete for the CEO's trust 
+ * using various cards and strategies. The game combines elements of strategy, trading, and social interaction.
+ *
+ * @section features_sec Key Features
+ * - Three types of cards: Characters, Actions, and Leverage cards
+ * - Trading system between players
+ * - Ally mechanics and their influence on gameplay
+ * - Built-in AI for playing against computer
+ * - Dynamic scoring system
+ *
+ * @section game_sec Game Rules
+ * The game ends when the "CEO Death" card is drawn. The winner is the player with the highest CEO trust score. 
+ * In case of a tie in trust, reputation and money scores are considered.
+ *
+ * @section tech_sec Technical Details
+ * - Developed in C++
+ * - Console interface
+ * - Object-oriented architecture
+ * - Comprehensive documentation using Doxygen
+ *
+ * @section install_sec Installation and Launch
+ * To build the project, use make:
+ * @code
+ * make
+ * @endcode
+ * 
+ * To launch the game:
+ * @code
+ * ./bin/main
+ * @endcode
+ * 
+ * To run unit tests:
+ * @code
+ * make test
+ * @endcode
+ *
+ * @section docs_sec Documentation
+ * - @ref rules "Game Rules"
+ * - @ref system_description "System Description"
+ * - @ref testing_strategy "Testing Strategy"
+ *
+ * @author Platon Lukyanov (B81)
+ * @version 1.0
+ * @date 2025
+ */ 

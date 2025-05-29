@@ -1,5 +1,5 @@
 CXX := g++
-CXXFLAGS := -Wall -Wpedantic -Werror -std=c++17 -Iinclude
+CXXFLAGS := -Wall -Wpedantic -Werror -std=c++20 -Iinclude
 LDFLAGS := -lpthread
 
 # Directories
@@ -48,5 +48,8 @@ clean:
 
 format:
 	find . \( -name '*.cpp' -o -name '*.h' \) -print0 | xargs -0 clang-format -i
+
+gen-docs:
+	doxygen Doxyfile
 
 .PHONY: all clean format test
