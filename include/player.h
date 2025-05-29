@@ -1,7 +1,8 @@
 /* Platon Lukyanov st128133@student.spbu.ru
  * Lab Work 2
  */
-#pragma once
+#ifndef INCLUDE_PLAYER_H
+#define INCLUDE_PLAYER_H
 
 #include <memory>
 #include <string>
@@ -191,3 +192,5 @@ class Player {
         std::shared_ptr<PlayerHand> hand_;  ///< Player's hand of cards
         std::vector<Ally> allies_;          ///< Player's allies
 };
+
+#endif // INCLUDE_PLAYER_H

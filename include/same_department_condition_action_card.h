@@ -1,7 +1,8 @@
 /* Platon Lukyanov st128133@student.spbu.ru
  * Lab Work 2
  */
-#pragma once
+#ifndef INCLUDE_SAME_DEPARTMENT_CONDITION_ACTION_CARD_H
+#define INCLUDE_SAME_DEPARTMENT_CONDITION_ACTION_CARD_H
 #include "action_card.h"
 #include "player.h"
 
@@ -58,3 +59,4 @@ class SameDepartmentConditionActionCard : public ActionCard {
     private:
         std::string department_;  ///< Department required to play this card
 };
+#endif // INCLUDE_SAME_DEPARTMENT_CONDITION_ACTION_CARD_H

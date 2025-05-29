@@ -1,7 +1,8 @@
 /* Platon Lukyanov st128133@student.spbu.ru
  * Lab Work 2
  */
-#pragma once
+#ifndef INCLUDE_CHARACTER_CARD_H
+#define INCLUDE_CHARACTER_CARD_H
 
 #include <string>
 
@@ -81,3 +82,5 @@ class CharacterCard : public Card {
         int money_;               ///< Character's money value (0-100)
         std::string department_;  ///< Character's department name
 };
+
+#endif // INCLUDE_CHARACTER_CARD_H

@@ -1,7 +1,8 @@
 /* Platon Lukyanov st128133@student.spbu.ru
  * Lab Work 2
  */
-#pragma once
+#ifndef INCLUDE_CARD_FACTORY_H
+#define INCLUDE_CARD_FACTORY_H
 
 #include <memory>
 
@@ -75,3 +76,5 @@ class CardFactory {
          */
         static std::unique_ptr<EndCard> createEndCard(int id);
 };
+
+#endif // INCLUDE_CARD_FACTORY_H

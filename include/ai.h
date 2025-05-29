@@ -1,7 +1,8 @@
 /* Platon Lukyanov st128133@student.spbu.ru
  * Lab Work 2
  */
-#pragma once
+#ifndef INCLUDE_AI_H
+#define INCLUDE_AI_H
 
 #include <memory>
 
@@ -42,3 +43,5 @@ class AI : public Player {
         static constexpr const char* AI_NAME =
             "AI";  ///< Display name for AI players
 };
+
+#endif // INCLUDE_AI_H

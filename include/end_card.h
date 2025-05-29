@@ -1,7 +1,8 @@
 /* Platon Lukyanov st128133@student.spbu.ru
  * Lab Work 2
  */
-#pragma once
+#ifndef INCLUDE_END_CARD_H
+#define INCLUDE_END_CARD_H
 
 #include "card.h"
 
@@ -41,3 +42,5 @@ class EndCard : public Card {
          */
         void execute(Player& player) override;
 };
+
+#endif // INCLUDE_END_CARD_H

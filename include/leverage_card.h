@@ -1,7 +1,8 @@
 /* Platon Lukyanov st128133@student.spbu.ru
  * Lab Work 2
  */
-#pragma once
+#ifndef INCLUDE_LEVERAGE_CARD_H
+#define INCLUDE_LEVERAGE_CARD_H
 
 #include "card.h"
 
@@ -114,3 +115,5 @@ class LeverageCard : public Card {
          */
         virtual void executePreeffects(Player& player);
 };
+
+#endif // INCLUDE_LEVERAGE_CARD_H

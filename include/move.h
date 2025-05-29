@@ -1,7 +1,8 @@
 /* Platon Lukyanov st128133@student.spbu.ru
  * Lab Work 2
  */
-#pragma once
+#ifndef INCLUDE_MOVE_H
+#define INCLUDE_MOVE_H
 
 #include <memory>
 
@@ -78,3 +79,5 @@ class Move {
         std::shared_ptr<Card> card_;  ///< Card involved in the move
         bool hasPlayed_;
 };
+
+#endif // INCLUDE_MOVE_H

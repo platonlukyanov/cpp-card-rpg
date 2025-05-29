@@ -1,7 +1,8 @@
 /* Platon Lukyanov st128133@student.spbu.ru
  * Lab Work 2
  */
-#pragma once
+#ifndef INCLUDE_TRUST_BEFORE_CONDITION_LEVERAGE_CARD_H
+#define INCLUDE_TRUST_BEFORE_CONDITION_LEVERAGE_CARD_H
 #include "leverage_card.h"
 #include "player.h"
 
@@ -58,3 +59,4 @@ class TrustBeforeConditionLeverageCard : public LeverageCard {
     private:
         int minTrust_;  ///< Minimum required trust level to use the card
 };
+#endif // INCLUDE_TRUST_BEFORE_CONDITION_LEVERAGE_CARD_H

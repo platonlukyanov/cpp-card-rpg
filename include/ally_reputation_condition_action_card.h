@@ -1,7 +1,8 @@
 /* Platon Lukyanov st128133@student.spbu.ru
  * Lab Work 2
  */
-#pragma once
+#ifndef INCLUDE_ALLY_REPUTATION_CONDITION_ACTION_CARD_H
+#define INCLUDE_ALLY_REPUTATION_CONDITION_ACTION_CARD_H
 #include "action_card.h"
 #include "player.h"
 
@@ -55,3 +56,4 @@ class AllyReputationConditionActionCard : public ActionCard {
     private:
         int minAllyReputation_;
 };
+#endif // INCLUDE_ALLY_REPUTATION_CONDITION_ACTION_CARD_H

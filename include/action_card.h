@@ -1,7 +1,8 @@
 /* Platon Lukyanov st128133@student.spbu.ru
  * Lab Work 2
  */
-#pragma once
+#ifndef INCLUDE_ACTION_CARD_H
+#define INCLUDE_ACTION_CARD_H
 
 #include "card.h"
 
@@ -75,3 +76,5 @@ class ActionCard : public Card {
         int moneyChange_;       ///< Player's money change
         int trustChange_;       ///< Player's trust change
 };
+
+#endif // INCLUDE_ACTION_CARD_H

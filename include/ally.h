@@ -1,7 +1,8 @@
 /* Platon Lukyanov st128133@student.spbu.ru
  * Lab Work 2
  */
-#pragma once
+#ifndef INCLUDE_ALLY_H
+#define INCLUDE_ALLY_H
 
 #include <string>
 
@@ -52,3 +53,5 @@ class Ally {
         int money_;
         std::string department_;
 };
+
+#endif // INCLUDE_ALLY_H

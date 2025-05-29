@@ -1,7 +1,8 @@
 /* Platon Lukyanov st128133@student.spbu.ru
  * Lab Work 2
  */
-#pragma once
+#ifndef INCLUDE_OWN_REPUTATION_BEFORE_MOVE_CONDITION_ACTION_CARD_H
+#define INCLUDE_OWN_REPUTATION_BEFORE_MOVE_CONDITION_ACTION_CARD_H
 #include "action_card.h"
 #include "player.h"
 
@@ -61,3 +62,4 @@ class OwnReputationBeforeMoveConditionActionCard : public ActionCard {
         int minReputation_;  ///< Minimum required reputation level to play the
                              ///< card
 };
+#endif // INCLUDE_OWN_REPUTATION_BEFORE_MOVE_CONDITION_ACTION_CARD_H

@@ -1,7 +1,8 @@
 /* Platon Lukyanov st128133@student.spbu.ru
  * Lab Work 2
  */
-#pragma once
+#ifndef INCLUDE_STACK_H
+#define INCLUDE_STACK_H
 
 #include <memory>
 #include <vector>
@@ -99,3 +100,5 @@ class Stack {
     private:
         std::vector<Card*> cards_;  ///< Collection of cards in the stack
 };
+
+#endif // INCLUDE_STACK_H

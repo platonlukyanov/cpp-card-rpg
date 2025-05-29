@@ -1,7 +1,8 @@
 /* Platon Lukyanov st128133@student.spbu.ru
  * Lab Work 2
  */
-#pragma once
+#ifndef INCLUDE_PLAYER_HAND_H
+#define INCLUDE_PLAYER_HAND_H
 
 #include <memory>
 #include <vector>
@@ -54,3 +55,5 @@ class PlayerHand {
         std::vector<std::shared_ptr<LeverageCard>>
             leverageCards_;  ///< Only leverage cards
 };
+
+#endif // INCLUDE_PLAYER_HAND_H

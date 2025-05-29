@@ -1,7 +1,8 @@
 /* Platon Lukyanov st128133@student.spbu.ru
  * Lab Work 2
  */
-#pragma once
+#ifndef INCLUDE_CARD_H
+#define INCLUDE_CARD_H
 
 #include <string>
 
@@ -87,3 +88,5 @@ class Card {
         Type type_;         ///< Card type (determines play rules)
         std::string name_;  ///< Display name shown to players
 };
+
+#endif // INCLUDE_CARD_H

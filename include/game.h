@@ -1,7 +1,8 @@
 /* Platon Lukyanov st128133@student.spbu.ru
  * Lab Work 2
  */
-#pragma once
+#ifndef INCLUDE_GAME_H
+#define INCLUDE_GAME_H
 
 #include <queue>
 #include <string>
@@ -96,3 +97,5 @@ class Game {
         std::queue<std::shared_ptr<Player>>
             playersQueue_;  ///< Current turn order
 };
+
+#endif // INCLUDE_GAME_H
