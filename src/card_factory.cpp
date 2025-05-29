@@ -24,7 +24,7 @@ struct LeverageCardParams {
         int trust;
         int money;
         int influence;
-        int condition = 0;  // Для специальных карт
+        int condition = 0;  // For special cards
 };
 
 const std::unordered_map<std::string, CharacterCardParams> CHARACTER_PARAMS = {
