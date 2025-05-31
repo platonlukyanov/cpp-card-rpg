@@ -65,7 +65,8 @@ void displayCard(std::shared_ptr<Card> card) {
             printStat("Trust", leverageCard->getTrustDamage(), Color::BLUE);
             break;
         }
-        default:
+        default
+        :
             std::cout << std::endl;
     }
 }
