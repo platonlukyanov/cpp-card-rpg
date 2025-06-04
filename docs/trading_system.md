@@ -1,62 +1,62 @@
-# Система торговли и выкупа в игре 
+# Trading and Buyout System in the Game
 
-## Общее описание
+## General Description
 
-Система торговли и выкупа является дополнительной функциональностью, которая значительно расширяет стратегические возможности игроков. Она позволяет игрокам взаимодействовать друг с другом, обмениваясь картами за внутриигровую валюту.
+The trading and buyout system is an additional functionality that significantly expands the strategic possibilities for players. It allows players to interact with each other by exchanging cards for in-game currency.
 
-## Базовая система без торговли
+## Base System Without Trading
 
-В базовой версии игры без системы торговли:
-1. Игроки могут только использовать карты, которые они получали в свой ход
-2. Не имеют возможности передавать карты другим игрокам
-3. Если карта не подходит игроку (например, персонаж из другого отдела), её можно только отклонить
-4. Нет механизма выкупа leverage cards
+In the base version of the game without the trading system:
+1. Players can only use cards they receive during their turn
+2. Have no ability to transfer cards to other players
+3. If a card doesn't suit a player (e.g., a character from a different department), it can only be declined
+4. No mechanism for buying out leverage cards
 
-## Добавленная функциональность
+## Added Functionality
 
-### 1. Система торговли картами
+### 1. Card Trading System
 
-#### Торговля персонажами (Character Cards)
-- Игроки могут продавать карты персонажей другим игрокам
-- Цена определяется соглашением между игроками
-- Покупатель должен быть из того же отдела, что и персонаж
-- При успешной сделке:
-  - Покупатель теряет указанную сумму денег
-  - Продавец получает указанную сумму денег
-  - Карта переходит к покупателю и применяется к нему
+#### Character Card Trading
+- Players can sell character cards to other players
+- Price is determined by agreement between players
+- The buyer must be from the same department as the character
+- Upon successful transaction:
+  - Buyer loses the specified amount of money
+  - Seller gains the specified amount of money
+  - Card transfers to the buyer and is applied to them
 
-#### Торговля действиями (Action Cards)
-- Любые карты действий могут быть проданы
-- Цена определяется соглашением между игроками
-- При успешной сделке:
-  - Покупатель теряет указанную сумму денег
-  - Продавец получает указанную сумму денег
-  - Эффект карты применяется к покупателю
+#### Action Card Trading
+- Any action cards can be sold
+- Price is determined by agreement between players
+- Upon successful transaction:
+  - Buyer loses the specified amount of money
+  - Seller gains the specified amount of money
+  - Card effect is applied to the buyer
 
-### 2. Система выкупа карт влияния (Leverage Cards)
+### 2. Leverage Card Buyout System
 
-#### Механизм выкупа
-- Когда игрок использует карту влияния против другого игрока
-- Целевой игрок может предложить выкуп карты
-- Если владелец карты соглашается на выкуп:
-  - Карта влияния деактивируется
-  - Деньги переходят от целевого игрока к владельцу карты
-  - Эффект карты не применяется
+#### Buyout Mechanism
+- When a player uses a leverage card against another player
+- The target player can offer to buy out the card
+- If the card owner agrees to the buyout:
+  - The leverage card is deactivated
+  - Money transfers from the target player to the card owner
+  - The card effect is not applied
 
-#### Особые условия
-- Выкуп возможен только если карта еще не была применена
-- Цена выкупа определяется соглашением между игроками вне поведения игры, игра отвечает за подтверждение транзакции
+#### Special Conditions
+- Buyout is only possible if the card hasn't been used yet
+- Buyout price is determined by agreement between players outside of game behavior, the game is responsible for transaction confirmation
 
-## Примеры взаимодействия
+## Interaction Examples
 
-### Пример 1: Торговля действиям
-![Изображение, показывающие пример торговли действиями](images/image1.png)
+### Example 1: Action Card Trading
+![Image showing an example of action card trading](images/image1.png)
 
-### Пример 2: Выкуп карты влияния
-![Изображение, показывающие пример выкупа карты влияния](images/image2.png)
+### Example 2: Leverage Card Buyout
+![Image showing an example of leverage card buyout](images/image2.png)
 
-## Заключение
-Система торговли и выкупа добавляет новый уровень стратегической глубины, позволяя:
-- Получать выгоду от карт, которые им не подходят
-- Защищаться от негативных эффектов карт влияния
-- Управлять своими ресурсами более гибко 
+## Conclusion
+The trading and buyout system adds a new level of strategic depth, allowing players to:
+- Benefit from cards that don't suit them
+- Protect themselves from negative leverage card effects
+- Manage their resources more flexibly 
